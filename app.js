@@ -30,12 +30,15 @@ app.use(session({
 }));
 
 // ensure that a language is set for every session
+// and pull the language ahead of time, saving us some
+// calls to i18n.getLanguage()
+var language;
 app.use(function(req, res, next) {
-    var language = req.session.language;
-
-    if (language == {} || typeof language === "undefined") {
-        language = req.session.language = i18n.defaultLanguage;
+    if (typeof req.session.language === "undefined") {
+        i18n.changeLanguage(req.session);
     }
+
+    language = i18n.getLanguage(req.session.language);
 
     next();
 });
@@ -53,7 +56,7 @@ app.use('/css',express.static(__dirname + '/assets/css'));
 
 // frontend routes
 app.get('/', function (req, res) {
-    var language = req.session.language;
+    var language = i18n.getLanguage(req.session.language);
     language.PG_TITLE = language.PG_HOME;
 
     if (req.session.user) {
@@ -65,14 +68,18 @@ app.get('/', function (req, res) {
     res.render('home', language);
 });
 
+app.get('/debug', function (req, res) {
+    res.json(req.session);
+});
+
 app.get('/login', function (req, res) {
-    var language = req.session.language;
+    var language = i18n.getLanguage(req.session.language);
     language.PG_TITLE = language.PG_LOGIN;
     res.render('login', language);
 });
 
 app.get('/signup', function (req, res) {
-    var language = req.session.language;
+    var language = i18n.getLanguage(req.session.language);
     language.PG_TITLE = language.PG_SIGNUP;
     res.render('signup', language);
 });

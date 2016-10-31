@@ -1,5 +1,5 @@
 {
-    "name":"french",
+    "_name":"french",
 
     "PG_HOME":"Page Principale",
     "PG_LOGIN":"Se connecter",
@@ -25,7 +25,7 @@
     "PGTXT_SIGNUP_CONEMAIL_PLC":"Adresse E-mail",
     "PGTXT_PROFILE_DETAILS":"Details",
     "PGTXT_PROFILE_JOINDATE":"Compte créé le:",
-    
+
     "RSP_HOME_LOGOUT_SUCCESS":"Vous êtes maintenant déconnecté.",
     "RSP_HOME_LOGOUT_ERROR":"Vous n'êtes pas connecté.",
     "RSP_LOGIN_USERNAME_ERROR":"L'indentifiant est invalide, veuillez contacter le support si vous ne parvenez plus à vous connecter.",

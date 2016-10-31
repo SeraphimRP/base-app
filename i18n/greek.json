@@ -1,5 +1,5 @@
 {
-    "name":"greek",
+    "_name":"greek",
 
     "PG_HOME":"Αρχική",
     "PG_LOGIN":"Σύνδεση",
@@ -25,7 +25,7 @@
     "PGTXT_SIGNUP_CONEMAIL_PLC":"Επιβεβαιώστε το email σας",
     "PGTXT_PROFILE_DETAILS":"Λεπτομέρειες",
     "PGTXT_PROFILE_JOINDATE":"Συνδέθηκε στις:",
-    
+
     "RSP_HOME_LOGOUT_SUCCESS":"Επιτυχής αποσύνδεση.",
     "RSP_HOME_LOGOUT_ERROR":"Δεν έχετε συνδεθεί.",
     "RSP_LOGIN_USERNAME_ERROR":"Λανθασμένο όνομα χρήστη, επικοινωνήστε με την υποστήριξη αν χρειάζεται να επαναφέρετε τον λογαριασμό σας.",

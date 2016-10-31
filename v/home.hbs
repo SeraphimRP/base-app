@@ -4,9 +4,23 @@
         <div id="content">
             {{PGTXT_HOME_GREETING}} {{name}}
             <br>
-            {{PGTXT_HOME_LOGOUT_MSG}} <input type="button" value="{{PGTXT_HOME_LOGOUT_BTN}}" onClick="logout()">?
+            {{PGTXT_HOME_LOGOUT_MSG}} <input type="button" value="{{PGTXT_HOME_LOGOUT_BTN}}" onClick="logout()">
             <br>
-            Would you like to change language? <input type="button" value="yes" onClick="changeLanguage()">
+            Language:
+            <form id="form">
+                <select name="language">
+                    <option value="english">English</option>
+                    <option value="esperanto">Esperanto</option>
+                    <option value="french">Français</option>
+                    <option value="german">Deutsch</option>
+                    <option value="greek">Ελληνικά</option>
+                    <option value="italian">Italiano</option>
+                    <option value="polish">Polski</option>
+                    <option value="russian">Русский</option>
+                    <option value="spanish">Español</option>
+                    <option value="ukrainian">Українська</option>
+                </select>
+                <input type="button" value="submit" onClick="changeLanguage()">
         </div>
 
         <script type="text/javascript">
@@ -20,11 +34,10 @@
             }
 
             function changeLanguage() {
-                var responseMessage = document.createElement('span');
-                $.post("/api/change_language", {language: "english"}, function(data) {
-                    responseMessage.innerHTML = "<br>" + data;
-                    $("span").hide();
-                    $("#content").append(responseMessage);
+                $.post("/api/change_language", $("#form").serializeObject(), function(data) {
+                    if (data) {
+                        window.location.replace("/");
+                    }
                 });
             }
         </script>

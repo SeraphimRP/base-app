@@ -1,5 +1,5 @@
 {
-    "name":"portuguese",
+    "_name":"portuguese",
 
     "PG_HOME":"Início",
     "PG_LOGIN":"Entrar",
@@ -25,7 +25,7 @@
     "PGTXT_SIGNUP_CONEMAIL_PLC":"Confirmar seu Email",
     "PGTXT_PROFILE_DETAILS":"Detalhes",
     "PGTXT_PROFILE_JOINDATE":"Ingressou em:",
-    
+
     "RSP_HOME_LOGOUT_SUCCESS":"Desconectado com sucesso.",
     "RSP_HOME_LOGOUT_ERROR":"Você não está conectado.",
     "RSP_LOGIN_USERNAME_ERROR":"Nome de usuário inválido, contate o suporte se você precisa recuperar sua conta.",
