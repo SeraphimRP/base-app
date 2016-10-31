@@ -11,7 +11,6 @@ var sessionStore = require('express-nedb-session')(session);
 // use the api routes and the i18n handler
 var api = require('./api');
 var i18n = require('./i18n');
-//console.log(i18n);
 
 var app = express();
 
@@ -56,7 +55,6 @@ app.use('/css',express.static(__dirname + '/assets/css'));
 
 // frontend routes
 app.get('/', function (req, res) {
-    var language = i18n.getLanguage(req.session.language);
     language.PG_TITLE = language.PG_HOME;
 
     if (req.session.user) {
@@ -73,13 +71,11 @@ app.get('/debug', function (req, res) {
 });
 
 app.get('/login', function (req, res) {
-    var language = i18n.getLanguage(req.session.language);
     language.PG_TITLE = language.PG_LOGIN;
     res.render('login', language);
 });
 
 app.get('/signup', function (req, res) {
-    var language = i18n.getLanguage(req.session.language);
     language.PG_TITLE = language.PG_SIGNUP;
     res.render('signup', language);
 });
