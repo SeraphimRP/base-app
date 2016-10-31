@@ -1,5 +1,5 @@
 {
-    "name":"spanish",
+    "_name":"spanish",
 
     "PG_HOME":"Inicio",
     "PG_LOGIN":"Iniciar sesión",
@@ -8,7 +8,7 @@
 
     "PGTXT_HOME_GREETING":"Hola",
     "PGTXT_HOME_LOGOUT_MSG":"Se gustaría",
-    "PGTXT_HOME_LOGOUT_BTN":"Cerrar sesión?",
+    "PGTXT_HOME_LOGOUT_BTN":"cerrar sesión?",
     "PGTXT_LOGIN_USERNAME":"Nombre de usuario:",
     "PGTXT_LOGIN_USERNAME_PLC":"Nombre de usuario",
     "PGTXT_LOGIN_PASSWORD":"Contraseña:",
@@ -25,7 +25,7 @@
     "PGTXT_SIGNUP_CONEMAIL_PLC":"Confirma tu correo",
     "PGTXT_PROFILE_DETAILS":"Detalles",
     "PGTXT_PROFILE_JOINDATE":"Se unió:",
-    
+
     "RSP_HOME_LOGOUT_SUCCESS":"Sesión cerrada exitosamente.",
     "RSP_HOME_LOGOUT_ERROR":"No has iniciado sesión.",
     "RSP_LOGIN_USERNAME_ERROR":"Nombre de usuario incorrecto, contáctate con soporte si necesitas recuperar tu cuenta.",

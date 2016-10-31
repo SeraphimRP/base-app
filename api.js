@@ -31,6 +31,15 @@ var db = new dataStore({ filename: 'db', autoload: true });
     }
 */
 
+// pull the language ahead of time, saving us on
+// a billion calls to i18n.getLanguage()
+var language;
+router.use(function (req, res, next) {
+    language = i18n.getLanguage(req.session.language);
+    next();
+});
+
+
 // Ensure that the previously mentioned module is hooked in.
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
@@ -95,8 +104,8 @@ router.post('/signup', function (req, res) {
     var data = req.body;
 
     // makes sure that they match, so that way people don't mess up accidentally
-    if (data.password != data.confirmpass) { res.send(req.session.language.RSP_SIGNUP_UNMATCH_PASS); return; }
-    if (data.email != data.confirmemail) { res.send(req.session.language.RSP_SIGNUP_UNMATCH_EMAIL); return; }
+    if (data.password != data.confirmpass) { res.send(language.RSP_SIGNUP_UNMATCH_PASS); return; }
+    if (data.email != data.confirmemail) { res.send(language.RSP_SIGNUP_UNMATCH_EMAIL); return; }
 
     // escape every input, hash the password (with a random salt), and create a join date
     var salt = crypto.randomBytes(16).toString("hex");
@@ -111,26 +120,26 @@ router.post('/signup', function (req, res) {
     db.find({$or: [{ "username": username }, { "email": email }]}, function (err, docs) {
         // if cases handling what happens as a result of the data;
         if (isReserved(username)) {
-            res.send(req.session.language.RSP_SIGNUP_USER_RESERVED);
+            res.send(language.RSP_SIGNUP_USER_RESERVED);
         } else if (docs.length != 0) {
             usernameOrEmail = (username === docs[0].username ? "username" : "email");
             switch (usernameOrEmail) {
                 case "username":
-                    res.send(req.session.language.RSP_SIGNUP_USER_USED);
+                    res.send(language.RSP_SIGNUP_USER_USED);
                     break;
                 case "email":
-                    res.send(req.session.language.RSP_SIGNUP_EMAIL_USED);
+                    res.send(language.RSP_SIGNUP_EMAIL_USED);
                     break;
             }
         } else if (username.indexOf(' ') >= 0) {
-            res.send(req.session.language.RSP_SIGNUP_USER_NOWHTSPC);
+            res.send(language.RSP_SIGNUP_USER_NOWHTSPC);
         } else if (!validator.isEmail(email)) {
-            res.send(req.session.language.RSP_SIGNUP_INVALID_EMAIL);
+            res.send(language.RSP_SIGNUP_INVALID_EMAIL);
         } else {
             if (!databaseInsert(username, password, email, joinDate, salt)) {
-                res.send(req.session.language.RSP_SIGNUP_ERROR + joinDate.toString());
+                res.send(language.RSP_SIGNUP_ERROR + joinDate.toString());
             } else {
-                res.send(req.session.language.RSP_SIGNUP_SUCCESS);
+                res.send(language.RSP_SIGNUP_SUCCESS);
             }
         }
     });
@@ -147,22 +156,23 @@ router.post("/login", function (req, res) {
             var password = sha512(validator.escape(data.password) + queryResult.salt);
 
             if (password != queryResult.password) {
-                res.send(req.session.language.RSP_LOGIN_PASSWORD_ERROR);
+                res.send(language.RSP_LOGIN_PASSWORD_ERROR);
             } else {
                 // save the language so that way it doesn't change
                 // when regeneration happens
-                var language = req.session.language;
+                var languageName = req.session.language;
+                var language = i18n.getLanguage(languageName);
 
                 // regenerate to avoid session fixation
                 req.session.regenerate(function() {
                     req.session.user = queryResult;
-                    req.session.language = language;
+                    req.session.language = languageName;
 
-                    res.send(req.session.language.RSP_LOGIN_SUCCESS);
+                    res.send(language.RSP_LOGIN_SUCCESS);
                 });
             }
         } else {
-            res.send(req.session.language.RSP_LOGIN_USERNAME_ERROR);
+            res.send(language.RSP_LOGIN_USERNAME_ERROR);
         }
     });
 });
@@ -170,13 +180,13 @@ router.post("/login", function (req, res) {
 router.get("/logout", function (req, res) {
     if (req.session.user) {
         req.session.destroy(function() {
-            res.send(req.session.language.RSP_HOME_LOGOUT_SUCCESS);
+            res.send(language.RSP_HOME_LOGOUT_SUCCESS);
         });
     } else {
         // as much as we can destroy the session, because one always exists
         // it's not really necessary to do as it's not like there's anything
         // to destroy other than some IDs.
-        res.send(req.session.language.RSP_HOME_LOGOUT_ERROR);
+        res.send(language.RSP_HOME_LOGOUT_ERROR);
     }
 });
 

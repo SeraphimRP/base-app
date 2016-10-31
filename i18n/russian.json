@@ -1,5 +1,5 @@
 {
-    "name":"russian",
+    "_name":"russian",
 
     "PG_HOME":"Начало",
     "PG_LOGIN":"Вход",
@@ -19,8 +19,8 @@
     "PGTXT_SIGNUP_PASSWORD_PLC":"Пароль",
     "PGTXT_SIGNUP_CONPASSWORD":"Подтвердите пароль:",
     "PGTXT_SIGNUP_CONPASSWORD_PLC":"Подтвердите ваш пароль",
-    "PGTXT_SIGNUP_EMAIL":"е-мейл:",
-    "PGTXT_SIGNUP_EMAIL_PLC":"е-мейл",
+    "PGTXT_SIGNUP_EMAIL":"E-мейл:",
+    "PGTXT_SIGNUP_EMAIL_PLC":"E-мейл",
     "PGTXT_SIGNUP_CONEMAIL":"Подтвердите е-мейл:",
     "PGTXT_SIGNUP_CONEMAIL_PLC":"Подтвердите ваш е-мейл",
     "PGTXT_PROFILE_DETAILS":"Детали",
@@ -32,7 +32,7 @@
     "RSP_LOGIN_PASSWORD_ERROR":"Неправильный пароль, обратитесь в поддержку, если вам нужно восстановить аккаунт.",
     "RSP_LOGIN_SUCCESS":"Успешный вход.",
     "RSP_SIGNUP_UNMATCH_PASS":"Пароль и его подтверждение не совпадают.",
-    "RSP_SIGNUP_UNMATCH_EMAIL":"е-мейл и его подтверждение не совпадают.",
+    "RSP_SIGNUP_UNMATCH_EMAIL":"E-мейл и его подтверждение не совпадают.",
     "RSP_SIGNUP_USER_RESERVED":"Это имя пользователя зарезервировано или запрещено, обратитесь в поддержку за дополнительной информацией.",
     "RSP_SIGNUP_USER_USED":"Это имя пользователя уже используется, обратитесь в поддержку, если вам нужно восстановить аккаунт.",
     "RSP_SIGNUP_EMAIL_USED":"Этот е-мейл уже используется, обратитесь в поддержку, если вам нужно восстановить аккаунт.",

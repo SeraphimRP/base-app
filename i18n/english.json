@@ -1,5 +1,5 @@
 {
-    "name":"english",
+    "_name":"english",
 
     "PG_HOME":"Home",
     "PG_LOGIN":"Login",
@@ -25,7 +25,7 @@
     "PGTXT_SIGNUP_CONEMAIL_PLC":"Confirm Your Email",
     "PGTXT_PROFILE_DETAILS":"Details",
     "PGTXT_PROFILE_JOINDATE":"Joined on:",
-    
+
     "RSP_HOME_LOGOUT_SUCCESS":"Logged out successfully.",
     "RSP_HOME_LOGOUT_ERROR":"You are not logged in.",
     "RSP_LOGIN_USERNAME_ERROR":"Invalid username, contact support if you need to recover your account.",

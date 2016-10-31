@@ -1,11 +1,11 @@
 {
-    "name":"esperanto",
+    "_name":"esperanto",
 
     "PG_HOME":"Hejmo",
     "PG_LOGIN":"Ensaluti",
     "PG_SIGNUP":"Registriĝi",
     "PG_PROFILE":"Profilo de %s",
-    
+
     "PGTXT_HOME_GREETING":"Saluton",
     "PGTXT_HOME_LOGOUT_MSG":"Ĉu vi volas",
     "PGTXT_HOME_LOGOUT_BTN":"logout?",

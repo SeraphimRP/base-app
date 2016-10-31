@@ -1,5 +1,5 @@
 {
-    "name":"italian",
+    "_name":"italian",
 
     "PG_HOME":"Inizio",
     "PG_LOGIN":"Accesso",
@@ -25,7 +25,7 @@
     "PGTXT_SIGNUP_CONEMAIL_PLC":"Conferma Email",
     "PGTXT_PROFILE_DETAILS":"Dettagli",
     "PGTXT_PROFILE_JOINDATE":"Membro da:",
-    
+
     "RSP_HOME_LOGOUT_SUCCESS":"Logout fatto con successo.",
     "RSP_HOME_LOGOUT_ERROR":"Non ha accesso.",
     "RSP_LOGIN_USERNAME_ERROR":"Username errato, contattare il supporto se bisogna recuperare l'account.",

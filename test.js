@@ -97,7 +97,7 @@ describe("API", function () {
                     .end(function (err, res) {
                         if (err)
                             return done(err);
-                        res.text.should.be.equal("Your password and confirmation password doesn't match.");
+                        res.text.should.be.equal("Your password and confirmation password do not match.");
                         done();
                     });
         });
@@ -117,7 +117,7 @@ describe("API", function () {
                     .end(function (err, res) {
                         if (err)
                             return done(err);
-                        res.text.should.be.equal("Your email and confirmation email doesn't match.");
+                        res.text.should.be.equal("Your email and confirmation email do not match.");
                         done();
                     });
         });
