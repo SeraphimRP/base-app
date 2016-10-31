@@ -31,14 +31,14 @@
     "RSP_LOGIN_USERNAME_ERROR":"Invalid username, contact support if you need to recover your account.",
     "RSP_LOGIN_PASSWORD_ERROR":"Invalid password, contact support if you need to recover your account.",
     "RSP_LOGIN_SUCCESS":"Logged in successfully.",
-    "RSP_SIGNUP_UNMATCH_PASS":"Your password and confirmation password doesn't match.",
-    "RSP_SIGNUP_UNMATCH_EMAIL":"Your email and confirmation email doesn't match.",
+    "RSP_SIGNUP_UNMATCH_PASS":"Your password and confirmation password do not match.",
+    "RSP_SIGNUP_UNMATCH_EMAIL":"Your email and confirmation email do not match.",
     "RSP_SIGNUP_USER_RESERVED":"This username is reserved or not allowed, contact support for more information.",
     "RSP_SIGNUP_USER_USED":"This username is already in our database, contact support if you need to recover your account.",
     "RSP_SIGNUP_EMAIL_USED":"This email is already in our database, contact support if you need to recover your account.",
     "RSP_SIGNUP_USER_NOWHTSPC":"You cannot have whitespace in your username, sorry.",
     "RSP_SIGNUP_INVALID_EMAIL":"Please use a valid email.",
-    "RSP_SIGNUP_INVALID_CAPTCHA":"You cannot signup until you've completed the CAPTCHA correctly.",
+    "RSP_SIGNUP_INVALID_CAPTCHA":"You cannot signup until you have completed the CAPTCHA correctly.",
     "RSP_SIGNUP_SUCCESS":"Account created successfully, you may now login.",
-    "RSP_SIGNUP_ERROR":"For some reason, we failed to create your account. If this persists, please contact support and include this information: "
+    "RSP_SIGNUP_ERROR":"For some reason, we have failed to create your account. If this problem persists, please contact support and include this information: "
 }

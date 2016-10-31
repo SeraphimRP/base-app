@@ -7,6 +7,7 @@ var portuguese = require("./i18n/portuguese.json");
 var russian = require("./i18n/russian.json");
 var spanish = require("./i18n/spanish.json");
 var ukrainian = require("./i18n/ukrainian.json");
+var german = require("./i18n/german.json");
 
 var i18n = {
     english: english,
@@ -16,6 +17,7 @@ var i18n = {
     russian: russian,
     spanish: spanish,
     ukrainian: ukrainian,
+	german: german,
     defaultLanguage: english,
     changeLanguage: function(session, language) {
         switch (language) {
@@ -39,6 +41,9 @@ var i18n = {
                 break;
             case ukrainian.name:
                 session.language = ukrainian;
+				break;
+			case german.name:
+                session.language = german;
         }
     }
 }
