@@ -6,8 +6,20 @@
 
             <h3>{{PGTXT_PROFILE_DETAILS}}</h3>
 
+            {{#if isFriend}}
+                <input type="button" value="{{PGTXT_PROFILE_DEL_BTN}}" onClick="delFriend()">
+            {{else}}
+                <input type="button" value="{{PGTXT_PROFILE_DEL_BTN}}" onClick="delFriend()">
+            {{/if}}
+
             <ul>
-                <li>PGTXT_PROFILE_JOINDATE {{joinDate}}</li>
+                <li>{{PGTXT_PROFILE_JOINDATE}} {{joinDate}}</li>
+                <li>{{PGTXT_PROFILE_WEBSITE}} {{websiteURL}}</li>
+                <li>{{PGTXT_PROFILE_FRIENDS}}
+                    <ul id="friendlist">
+                        {{#each friend}}<li>{{this}}</li>
+                        {{else}}{{PGTXT_PROFILE_NO_FRIENDS}}{{/each}}
+                    </ul>
             </ul>
         </div>
     </body>

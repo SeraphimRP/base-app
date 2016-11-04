@@ -207,7 +207,7 @@ router.get("/id/:id", function (req, res) {
         res.send(JSON.stringify(result[0]));
 
         if (err != null) {
-            return {"err": "something goofed (id)"};
+            return {"id lookup err": err.toString()};
         }
     });
 });

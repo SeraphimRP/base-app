@@ -23,8 +23,12 @@
     "PGTXT_SIGNUP_EMAIL_PLC":"Email",
     "PGTXT_SIGNUP_CONEMAIL":"Confirm Email:",
     "PGTXT_SIGNUP_CONEMAIL_PLC":"Confirm Your Email",
+    "PGTXT_PROFILE_ADD_BTN":"Add as Friend",
+    "PGTXT_PROFILE_DEL_BTN":"Delete as Friend",
     "PGTXT_PROFILE_DETAILS":"Details",
     "PGTXT_PROFILE_JOINDATE":"Joined on:",
+    "PGTXT_PROFILE_WEBSITE":"Website: ",
+    "PGTXT_PROFILE_NO_FRIENDS":"None :c",
 
     "RSP_HOME_LOGOUT_SUCCESS":"Logged out successfully.",
     "RSP_HOME_LOGOUT_ERROR":"You are not logged in.",

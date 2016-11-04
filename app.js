@@ -80,4 +80,8 @@ app.get('/signup', function (req, res) {
     res.render('signup', language);
 });
 
+app.get('/profile/:id', function (req, res) {
+    // TODO
+});
+
 module.exports = app;
