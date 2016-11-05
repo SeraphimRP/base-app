@@ -20,6 +20,9 @@ var request = require("request");
 var dataStore = require("nedb");
 var db = new dataStore({ filename: "db", autoload: true });
 
+// the directory database, just for allowing users to show off their websites on the directory
+var dirDB = new dataStore({ filename: "directorydb", autoload: true });
+
 var debugMode = true;
 
 // NOTE: Change the reCAPTCHA stuff when we're going into production.

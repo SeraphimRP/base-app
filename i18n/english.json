@@ -56,7 +56,7 @@
     "PGTXT_ABOUT_A63":"Retejo.me has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order by a FISA court.",
     "PGTXT_ABOUT_Q7":"Does Retejo.me have any social media?",
     "PGTXT_ABOUT_A71":"Of course! We have <a href=\"https://twitter.com/retejo\">Twitter</a> and <a href=\"https://github.com/retejo\">GitHub</a>.",
-
+    "PGTXT_ABOUT_A72":"You can also hang out with us on <a href=\"https://discord.gg/Gyxy83x\">Discord</a> and <a href=\"https://telegram.me/joinchat/AXBufEAa4CgwFlN_Zaz6xg\">Telegram</a>, as well.",
 
     "PGTXT_LOGIN_USERNAME":"Username:",
     "PGTXT_LOGIN_USERNAME_PLC":"Username",
@@ -73,6 +73,7 @@
     "PGTXT_SIGNUP_EMAIL_PLC":"Email",
     "PGTXT_SIGNUP_CONEMAIL":"Confirm Email:",
     "PGTXT_SIGNUP_CONEMAIL_PLC":"Confirm Your Email",
+    "PGTXT_SIGNUP_TOSAGREE":"I agree to the <a href=\"/tos\">terms of service</a> and <a href=\"/privpolicy\">privacy policy</a>.",
 
     "PGTXT_PROFILE_ADD_BTN":"Add as Friend",
     "PGTXT_PROFILE_DEL_BTN":"Delete as Friend",
