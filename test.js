@@ -7,7 +7,7 @@ describe("API", function () {
         it("Should create a new user", function (done) {
             request(app)
                     .post("/api/signup")
-                    .set("Accept", "text/html")
+                    .set("Accept", "application/json")
                     .send({
                         username: "user1",
                         password: "password",
@@ -16,35 +16,35 @@ describe("API", function () {
                         confirmemail: "user1@domain.com"
                     })
                     .expect(200)
-                    .expect("Content-Type", "text/html; charset=utf-8")
+                    .expect("Content-Type", "application/json; charset=utf-8")
                     .end(function (err, res) {
                         if (err)
                             return done(err);
-                        res.text.should.be.equal("Account created successfully, you may now login.");
+                        res.body.should.have.property("ok", true);
                         done();
                     });
         });
         it("Should login successfully", function (done) {
             request(app)
                     .post("/api/login")
-                    .set("Accept", "text/html")
+                    .set("Accept", "application/json")
                     .send({
                         username: "user1",
                         password: "password",
                     })
                     .expect(200)
-                    .expect("Content-Type", "text/html; charset=utf-8")
+                    .expect("Content-Type", "application/json; charset=utf-8")
                     .end(function (err, res) {
                         if (err)
                             return done(err);
-                        res.text.should.be.equal("Logged in successfully.");
+                        res.body.should.have.property("ok", true);
                         done();
                 });
         });
         it("Should notify that the username already exists", function (done) {
             request(app)
                     .post("/api/signup")
-                    .set("Accept", "text/html")
+                    .set("Accept", "application/json")
                     .send({
                         username: "user1",
                         password: "password",
@@ -53,18 +53,18 @@ describe("API", function () {
                         confirmemail: "user2@domain.com"
                     })
                     .expect(200)
-                    .expect("Content-Type", "text/html; charset=utf-8")
+                    .expect("Content-Type", "application/json; charset=utf-8")
                     .end(function (err, res) {
                         if (err)
                             return done(err);
-                        res.text.should.be.equal("This username is already in our database, contact support if you need to recover your account.");
+                        res.body.should.have.property("ok", false);
                         done();
                     });
         });
         it("Should notify that the email already exists", function (done) {
             request(app)
                     .post("/api/signup")
-                    .set("Accept", "text/html")
+                    .set("Accept", "application/json")
                     .send({
                         username: "user2",
                         password: "password",
@@ -73,18 +73,18 @@ describe("API", function () {
                         confirmemail: "user1@domain.com"
                     })
                     .expect(200)
-                    .expect("Content-Type", "text/html; charset=utf-8")
+                    .expect("Content-Type", "application/json; charset=utf-8")
                     .end(function (err, res) {
                         if (err)
                             return done(err);
-                        res.text.should.be.equal("This email is already in our database, contact support if you need to recover your account.");
+                        res.body.should.have.property("ok", false);
                         done();
                     });
         });
         it("Should notify that the password and password confirmation are not the same", function (done) {
             request(app)
                     .post("/api/signup")
-                    .set("Accept", "text/html")
+                    .set("Accept", "application/json")
                     .send({
                         username: "user3",
                         password: "passwords",
@@ -93,18 +93,18 @@ describe("API", function () {
                         confirmemail: "user3@domain.com"
                     })
                     .expect(200)
-                    .expect("Content-Type", "text/html; charset=utf-8")
+                    .expect("Content-Type", "application/json; charset=utf-8")
                     .end(function (err, res) {
                         if (err)
                             return done(err);
-                        res.text.should.be.equal("Your password and confirmation password do not match.");
+                        res.body.should.have.property("ok", false);
                         done();
                     });
         });
         it("Should notify that the email and email confirmation are not the same", function (done) {
             request(app)
                     .post("/api/signup")
-                    .set("Accept", "text/html")
+                    .set("Accept", "application/json")
                     .send({
                         username: "user3",
                         password: "password",
@@ -113,11 +113,11 @@ describe("API", function () {
                         confirmemail: "user@domain.com"
                     })
                     .expect(200)
-                    .expect("Content-Type", "text/html; charset=utf-8")
+                    .expect("Content-Type", "application/json; charset=utf-8")
                     .end(function (err, res) {
                         if (err)
                             return done(err);
-                        res.text.should.be.equal("Your email and confirmation email do not match.");
+                        res.body.should.have.property("ok", false);
                         done();
                     });
         });
