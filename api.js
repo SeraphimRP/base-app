@@ -20,6 +20,8 @@ var request = require("request");
 var dataStore = require("nedb");
 var db = new dataStore({ filename: "db", autoload: true });
 
+var debugMode = true;
+
 // import environment variables (do not uncomment this unless the variables are set)
 /*
     var captchaSecret = process.env.CAPTCHA_SECRET;
@@ -144,7 +146,7 @@ router.post("/signup", function (req, res) {
             res.send(language.RSP_SIGNUP_USER_NOWHTSPC);
         } else if (!validator.isEmail(email)) {
             res.send(language.RSP_SIGNUP_INVALID_EMAIL);
-        } else if (r.success == true) {
+        } else if (!debugMode && r.success != true) {
             res.send("the captcha failed to validate, please refresh and try again");
         } else {
             if (!databaseInsert(username, password, email, joinDate, salt)) {
