@@ -8,6 +8,38 @@
         </div>
     </footer>
 
+    <script type="text/javascript">
+        function login() {
+            var responseMessage = document.createElement("p");
+            responseMessage.className = "loginerror bg-danger";
+            $.post("/api/login", $("#loginform").serializeObject(), function(data) {
+                if (data.ok != true) {
+                    responseMessage.innerHTML = data.text;
+                    $(".bg-danger").hide();
+                    $("#loginform").append(responseMessage);
+                } else {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function logout() {
+            $.get("/api/logout", function(data) {
+                if (data.ok == true) {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function changeLanguage(language) {
+            $.post("/api/change_language", { "language": language }, function(data) {
+                if (data.ok == true) {
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
+
     <script type="text/javascript" src="/js/jquery-3.1.0.min.js"></script>
     <script type="text/javascript" src="/js/jquery.serializeobject.js"></script>
 

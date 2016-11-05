@@ -1,21 +1,79 @@
 {{> head}}
 
     <body>
-        <div id="signup">
-            <form id="form">
-                {{PGTXT_SIGNUP_USERNAME}} <input name="username" type="text" placeholder="{{PGTXT_SIGNUP_USERNAME_PLC}}">
-                <br><br>
-                {{PGTXT_SIGNUP_PASSWORD}} <input name="password" type="password" placeholder="{{PGTXT_SIGNUP_PASSWORD_PLC}}">
-                <br>
-                {{PGTXT_SIGNUP_CONPASSWORD}} <input name="confirmpass" type="password" placeholder="{{PGTXT_SIGNUP_CONPASSWORD_PLC}}">
-                <br><br>
-                {{PGTXT_SIGNUP_EMAIL}} <input name="email" type="text" placeholder="{{PGTXT_SIGNUP_EMAIL_PLC}}">
-                <br>
-                {{PGTXT_SIGNUP_CONEMAIL}} <input name="confirmemail" type="text" placeholder="{{PGTXT_SIGNUP_CONEMAIL_PLC}}">
-                <br>
-                <div class="g-recaptcha" data-sitekey="6LelKgsUAAAAANN_lJ42z00Sonieb4yiM9kjyxpJ"></div>
+        <div class="container">
+
+            {{> nav signupActive=true}}
+
+            <form class="form-horizontal">
+            <fieldset>
+
+            <!-- Form Name -->
+            <legend>{{PG_SIGNUP}}</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="username">{{PGTXT_SIGNUP_USERNAME}}</label>
+              <div class="col-md-4">
+              <input id="username" name="username" type="text" placeholder="{{PGTXT_SIGNUP_USERNAME_PLC}}" class="form-control input-md">
+
+              </div>
+            </div>
+
+            <!-- Password input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="password">{{PGTXT_SIGNUP_PASSWORD}}</label>
+              <div class="col-md-4">
+                <input id="password" name="password" type="password" placeholder="{{PGTXT_SIGNUP_PASSWORD_PLC}}" class="form-control input-md">
+
+              </div>
+            </div>
+
+            <!-- Password input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="confirmpass">{{PGTXT_SIGNUP_CONPASSWORD}}</label>
+              <div class="col-md-4">
+                <input id="confirmpass" name="confirmpass" type="password" placeholder="{{PGTXT_SIGNUP_CONPASSWORD_PLC}}" class="form-control input-md">
+
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="email">{{PGTXT_SIGNUP_EMAIL}}</label>
+              <div class="col-md-4">
+              <input id="email" name="email" type="text" placeholder="{{PGTXT_SIGNUP_EMAIL_PLC}}" class="form-control input-md">
+
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="confirmemail">{{PGTXT_SIGNUP_CONEMAIL}}</label>
+              <div class="col-md-4">
+              <input id="confirmemail" name="confirmemail" type="text" placeholder="{{PGTXT_SIGNUP_CONEMAIL_PLC}}" class="form-control input-md">
+
+              </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="null"></label>
+                <div class="col-md-4">
+                    <div class="g-recaptcha" data-sitekey="6LelKgsUAAAAANN_lJ42z00Sonieb4yiM9kjyxpJ"></div>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="null"></label>
+              <div class="col-md-4">
+                <button id="submit" name="submit" class="btn btn-primary">{{PG_SIGNUP}}</button>
+              </div>
+            </div>
+
+            </fieldset>
             </form>
-            <input type="button" value="{{PG_SIGNUP}}" onClick="submit()">
+
         </div>
 
         <script type="text/javascript">

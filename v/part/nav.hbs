@@ -1,0 +1,72 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img id="logo" src="/img/logo.png" width="135px"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                {{#if homeActive}}
+                <li class="active"><a href="/">{{PG_HOME}}</a></li>
+                {{else}}
+                <li><a href="/">{{PG_HOME}}</a></li>
+                {{/if}}
+                {{#if aboutActive}}
+                <li class="active"><a href="/about">{{PG_ABOUT}}</a></li>
+                {{else}}
+                <li><a href="/about">{{PG_ABOUT}}</a></li>
+                {{/if}}
+                {{#if dirActive}}
+                <li class="active"><a href="/directory">{{PG_DIRECTORY}}</a></li>
+                {{else}}
+                <li><a href="/directory">{{PG_DIRECTORY}}</a></li>
+                {{/if}}
+                {{#if donateActive}}
+                <li class="active"><a href="/donate">{{PG_DONATE}}</a></li>
+                {{else}}
+                <li><a href="/donate">{{PG_DONATE}}</a></li>
+                {{/if}}
+                {{#if contactActive}}
+                <li class="active"><a href="/contact">{{PG_CONTACT}}</a></li>
+                {{else}}
+                <li><a href="/contact">{{PG_CONTACT}}</a></li>
+                {{/if}}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {{#if user}}
+                <li><a href="/profile/{{user.id}}">{{user.username}}</a></li>
+                <li><a href="#" onClick="logout()">{{PGTXT_HOME_LOGOUT_BTN}}</a></li>
+                {{else}}
+                {{#if signupActive}}
+                <li class="active"><a href="/signup"><span class="fa fa-user-plus"></span> {{PG_SIGNUP}}</a></li>
+                {{else}}
+                <li><a href="/signup"><span class="fa fa-user-plus"></span> {{PG_SIGNUP}}</a></li>
+                {{/if}}
+                <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="fa fa-sign-in"></span> {{PG_LOGIN}}</a>
+                    <div class="dropdown-menu" style="padding: 15px;">
+                        <form id="loginform">
+                            <input id="user_username" style="margin-bottom: 15px;" type="text" name="username" placeholder="{{PGTXT_LOGIN_USERNAME_PLC}}" size="30">
+                            <input id="user_password" style="margin-bottom: 15px;" type="password" name="password" placeholder="{{PGTXT_LOGIN_PASSWORD_PLC}}" size="30">
+                            <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="button" onClick="login()" value="{{PG_LOGIN}}" />
+                        </form>
+                    </div>
+                </li>
+                {{/if}}
+                <li style="margin-right: 13px;" class="dropdown navbar-right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{PGTXT_GLOBAL_LANGUAGE}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onClick="changeLanguage('english')">English</a></li>
+                        <li><a href="#" onClick="changeLanguage('esperanto')">Esperanto</a></li>
+                        <li><a href="#" onClick="changeLanguage('french')">Français</a></li>
+                        <li><a href="#" onClick="changeLanguage('german')">Deutsch</a></li>
+                        <li><a href="#" onClick="changeLanguage('greek')">Ελληνικά</a></li>
+                        <li><a href="#" onClick="changeLanguage('italian')">Italiano</a></li>
+                        <li><a href="#" onClick="changeLanguage('polish')">Polski</a></li>
+                        <li><a href="#" onClick="changeLanguage('russian')">Русский</a></li>
+                        <li><a href="#" onClick="changeLanguage('spanish')">Español</a></li>
+                        <li><a href="#" onClick="changeLanguage('ukrainian')">Українська</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

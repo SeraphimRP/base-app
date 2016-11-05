@@ -40,6 +40,7 @@ app.use(function(req, res, next) {
     next();
 });
 
+
 app.use('/api', api); // make sure the api routes are hooked up and working at /api
 
 // ensure that handlebars is the view engine on express' end
@@ -71,13 +72,39 @@ app.get('/debug', function (req, res) {
     res.json(req.session);
 });
 
+app.get('/about', function (req, res) {
+    language.PG_TITLE = language.PG_ABOUT;
+
+    if (req.session.user && req.session.user.username) {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
+        language.user = "";
+    }
+
+    res.render('about', language);
+})
+
 app.get('/login', function (req, res) {
     language.PG_TITLE = language.PG_LOGIN;
+
+    if (req.session.user && req.session.user.username) {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
+        language.user = "";
+    }
+
     res.render('login', language);
 });
 
 app.get('/signup', function (req, res) {
     language.PG_TITLE = language.PG_SIGNUP;
+
+    if (req.session.user && req.session.user.username) {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
+        language.user = "";
+    }
+
     res.render('signup', language);
 });
 
