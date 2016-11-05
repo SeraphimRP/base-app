@@ -24,11 +24,11 @@
 
                 var formObject = $("#form").serializeObject();
                 var captcha = grecaptcha.getResponse();
-                
+
                 formObject.captcha = captcha;
 
                 $.post("/api/signup", formObject, function(data) {
-                    responseMessage.innerHTML = data;
+                    responseMessage.innerHTML = data.text;
                     $("span").hide();
                     $("#signup").append(responseMessage);
                 });

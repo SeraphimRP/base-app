@@ -14,9 +14,13 @@
             function submit() {
                 var responseMessage = document.createElement('span');
                 $.post("/api/login", $("#form").serializeObject(), function(data) {
-                    responseMessage.innerHTML = data;
-                    $("span").hide();
-                    $("#login").append(responseMessage);
+                    if (data.ok != true) {
+                        responseMessage.innerHTML = data.text;
+                        $("span").hide();
+                        $("#login").append(responseMessage);
+                    } else {
+                        window.location.replace("/");
+                    }
                 });
             }
         </script>
