@@ -1,41 +1,102 @@
 {{> head}}
 
     <body>
-        <div id="content">
-            {{PGTXT_HOME_GREETING}} {{name}}
-            <br>
-            {{PGTXT_HOME_LOGOUT_MSG}} <input type="button" value="{{PGTXT_HOME_LOGOUT_BTN}}" onClick="logout()">
-            <br>
-            Language:
-            <form id="form">
-                <select name="language">
-                    <option value="english">English</option>
-                    <option value="esperanto">Esperanto</option>
-                    <option value="french">Français</option>
-                    <option value="german">Deutsch</option>
-                    <option value="greek">Ελληνικά</option>
-                    <option value="italian">Italiano</option>
-                    <option value="polish">Polski</option>
-                    <option value="russian">Русский</option>
-                    <option value="spanish">Español</option>
-                    <option value="ukrainian">Українська</option>
-                </select>
-                <input type="button" value="submit" onClick="changeLanguage()">
+        <div class="container">
+
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/"><img id="logo" src="/img/logo.png" width="135px"></a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/">{{PG_HOME}}</a></li>
+                            <li><a href="/about">{{PG_ABOUT}}</a></li>
+                            <li><a href="/directory">{{PG_DIRECTORY}}</a></li>
+                            <li><a href="/donate">{{PG_DONATE}}</a></li>
+                            <li><a href="/contact">{{PG_CONTACT}}</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {{#if user}}
+                            <li><a href="/profile/{{user.id}}">{{user.username}}</a></li>
+                            <li><a href="#" onClick="logout()">{{PGTXT_HOME_LOGOUT_BTN}}</a></li>
+                            {{else}}
+                            <li><a href="/signup"><span class="fa fa-user-plus"></span> {{PG_SIGNUP}}</a></li>
+                			<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="fa fa-sign-in"></span> {{PG_LOGIN}}</a>
+                				<div class="dropdown-menu" style="padding: 30px; padding-bottom: 30px;">
+                				<form class="form-horizontal"  method="post" accept-charset="UTF-8">
+                				  {{PGTXT_LOGIN_USERNAME}} <input id="sp_uname" class="form-control login" type="text" name="sp_uname" placeholder="{{PGTXT_LOGIN_USERNAME_PLC}}" />
+                                  <br>
+                                  {{PGTXT_LOGIN_PASSWORD}} <input id="sp_pass" class="form-control login" type="password" name="sp_pass" placeholder="{{PGTXT_LOGIN_PASSWORD_PLC}}"/>
+                                  <br>
+                                  <input class="btn btn-primary" type="submit" name="submit" value="{{PG_LOGIN}}" />
+                				</form>
+                				</div>
+                			</li>
+                            {{/if}}
+                            <li style="margin-right: 13px;" class="dropdown navbar-right">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{PGTXT_GLOBAL_LANGUAGE}} <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" onClick="changeLanguage('english')">English</a></li>
+                                    <li><a href="#" onClick="changeLanguage('esperanto')">Esperanto</a></li>
+                                    <li><a href="#" onClick="changeLanguage('french')">Français</a></li>
+                                    <li><a href="#" onClick="changeLanguage('german')">Deutsch</a></li>
+                                    <li><a href="#" onClick="changeLanguage('greek')">Ελληνικά</a></li>
+                                    <li><a href="#" onClick="changeLanguage('italian')">Italiano</a></li>
+                                    <li><a href="#" onClick="changeLanguage('polish')">Polski</a></li>
+                                    <li><a href="#" onClick="changeLanguage('russian')">Русский</a></li>
+                                    <li><a href="#" onClick="changeLanguage('spanish')">Español</a></li>
+                                    <li><a href="#" onClick="changeLanguage('ukrainian')">Українська</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="jumbotron">
+                <h1>{{PGTXT_HOME_GREETING}}, {{name}}!</h1>
+                <p>{{PGTXT_HOME_INTRODUCTION}}</p>
+                <small>{{PGTXT_HOME_ASTERISK}}</small>
+            </div>
+
+            <div id="homecontent">
+                <h1>{{PGTXT_HOME_BENEFITS_Q}}</h1>
+                <dl class="dl-horizontal">
+                    <dt>{{PGTXT_HOME_BENEFIT_Q1}}</dt>
+                    <dl>&nbsp;&nbsp;{{PGTXT_HOME_BENEFIT_A1}}</dl>
+                    <dt>{{PGTXT_HOME_BENEFIT_Q2}}</dt>
+                    <dl>&nbsp;&nbsp;{{{PGTXT_HOME_BENEFIT_A2}}}</dl>
+                    <dt>{{PGTXT_HOME_BENEFIT_Q3}}</dt>
+                    <dl>&nbsp;&nbsp;{{PGTXT_HOME_BENEFIT_A3}}</dl>
+                    <dt>{{PGTXT_HOME_BENEFIT_Q4}}</dt>
+                    <dl>&nbsp;&nbsp;{{PGTXT_HOME_BENEFIT_A4}}</dl>
+                    <dt>{{PGTXT_HOME_BENEFIT_Q5}}</dt>
+                    <dl>&nbsp;&nbsp;{{PGTXT_HOME_BENEFIT_A5}}</dl>
+                </dl>
+
+                <hr>
+
+                <h1>{{PGTXT_HOME_CATCH_Q}}</h1>
+                <h4>{{PGTXT_HOME_CATCH_A1}}<br><br>
+                    {{PGTXT_HOME_CATCH_A2}}<br><br>
+                    {{PGTXT_HOME_CATCH_A3}}<br><br>
+                    {{PGTXT_HOME_CATCH_A4}}</h4>
+            </div>
         </div>
 
         <script type="text/javascript">
             function logout() {
-                var responseMessage = document.createElement('span');
                 $.get("/api/logout", function(data) {
-                    responseMessage.innerHTML = "<br>" + data;
-                    $("span").hide();
-                    $("#content").append(responseMessage);
+                    if (data.ok == true) {
+                        window.location.replace("/");
+                    }
                 });
             }
 
-            function changeLanguage() {
-                $.post("/api/change_language", $("#form").serializeObject(), function(data) {
-                    if (data) {
+            function changeLanguage(language) {
+                $.post("/api/change_language", { "language": language }, function(data) {
+                    if (data.ok == true) {
                         window.location.replace("/");
                     }
                 });

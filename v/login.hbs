@@ -1,6 +1,48 @@
 {{> head}}
 
-    <body>
+<body>
+    <div class="container">
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/"><img id="logo" src="/img/logo.png" width="135px"></a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">{{PG_HOME}}</a></li>
+                        <li><a href="/about">{{PG_ABOUT}}</a></li>
+                        <li><a href="/directory">{{PG_DIRECTORY}}</a></li>
+                        <li><a href="/donate">{{PG_DONATE}}</a></li>
+                        <li><a href="/contact">{{PG_CONTACT}}</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {{#if user}}
+                        <li><a href="/profile/{{user.id}}">{{user.username}}</a></li>
+                        <li><a href="#" onClick="logout()">{{PGTXT_HOME_LOGOUT_BTN}}</a></li>
+                        {{else}}
+                        <li class="active"><a href="/login">{{PG_LOGIN}}</a></li>
+                        {{/if}}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{PGTXT_GLOBAL_LANGUAGE}} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" onClick="changeLanguage('english')">English</a></li>
+                                <li><a href="#" onClick="changeLanguage('esperanto')">Esperanto</a></li>
+                                <li><a href="#" onClick="changeLanguage('french')">Français</a></li>
+                                <li><a href="#" onClick="changeLanguage('german')">Deutsch</a></li>
+                                <li><a href="#" onClick="changeLanguage('greek')">Ελληνικά</a></li>
+                                <li><a href="#" onClick="changeLanguage('italian')">Italiano</a></li>
+                                <li><a href="#" onClick="changeLanguage('polish')">Polski</a></li>
+                                <li><a href="#" onClick="changeLanguage('russian')">Русский</a></li>
+                                <li><a href="#" onClick="changeLanguage('spanish')">Español</a></li>
+                                <li><a href="#" onClick="changeLanguage('ukrainian')">Українська</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
         <div id="login">
             <form id="form">
                 {{PGTXT_LOGIN_USERNAME}} <input name="username" type="text" placeholder="{{PGTXT_LOGIN_USERNAME_PLC}}">

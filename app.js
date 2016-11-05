@@ -51,15 +51,18 @@ hbs.registerPartials(__dirname + '/v/part');
 // load the assets into their proper folder so the templates run smoothly
 app.use('/js',express.static(__dirname + '/assets/js'));
 app.use('/css',express.static(__dirname + '/assets/css'));
+app.use('/img',express.static(__dirname + '/assets/img'));
 
 // frontend routes
 app.get('/', function (req, res) {
     language.PG_TITLE = language.PG_HOME;
 
-    if (req.session.user) {
+    if (req.session.user && req.session.user.username) {
         language.name = req.session.user.username;
-    } else {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
         language.name = req.ip;
+        language.user = "";
     }
 
     res.render('home', language);

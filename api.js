@@ -90,7 +90,7 @@ function databaseInsert(username, password, email, joinDate, salt) {
     // returns: boolean
 
     // create a json object based on the values
-    var data = {"username": username, "password": password, "email": email, "joinDate": joinDate, "salt": salt};
+    var data = {"username": username, "password": password, "email": email, "joinDate": joinDate, "salt": salt, "ip": ip};
 
     db.insert(data, function (err, newDocument) {
         if (err != null) {
@@ -120,6 +120,7 @@ router.post("/signup", function (req, res) {
     var email = validator.normalizeEmail(validator.escape(data.email));
     var joinDateObject = new Date();
     var joinDate = joinDateObject.getTime();
+    var ip = req.ip;
     var captcha = data.captcha;
 
     // just verify that the captcha was fine on google's end
@@ -151,7 +152,7 @@ router.post("/signup", function (req, res) {
         } else if (!debugMode && r.success != true) {
             res.json({ok: false, text: "the captcha failed to validate, please refresh and try again"});
         } else {
-            if (!databaseInsert(username, password, email, joinDate, salt)) {
+            if (!databaseInsert(username, password, email, joinDate, salt, ip)) {
                 res.json({ok: false, text: language.RSP_SIGNUP_ERROR + joinDate.toString()});
             } else {
                 res.json({ok: true, text: language.RSP_SIGNUP_SUCCESS});
@@ -193,16 +194,13 @@ router.post("/login", function (req, res) {
 });
 
 router.get("/logout", function (req, res) {
-    if (req.session.user) {
-        req.session.destroy(function() {
+    // i would've handled a case where it didn't destroy the session
+    // if there was no user logged in, but because of a weird bug
+    // i'll allow it anyways, it doesn't change the functionality
+
+    req.session.destroy(function() {
             res.json({ok: true, text: language.RSP_HOME_LOGOUT_SUCCESS});
-        });
-    } else {
-        // as much as we can destroy the session, because one always exists
-        // it's not really necessary to do as it's not like there's anything
-        // to destroy other than some IDs.
-        res.json({ok: true, text: language.RSP_HOME_LOGOUT_ERROR});
-    }
+    });
 });
 
 
@@ -211,7 +209,7 @@ router.post("/change_language", function (req, res) {
     // the api wrapper for i18n.changeLanguage()
     var data = req.body;
     var result = i18n.changeLanguage(req.session, data.language);
-    res.send(result);
+    res.json({ok: result});
 });
 
 router.get("/id/:id", function (req, res) {
