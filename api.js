@@ -1,23 +1,26 @@
 // Instead of creating it as an independent app,
 // we use it as an attachment to our currently existing app.
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 // Import languages
-var i18n = require('./i18n');
+var i18n = require("./i18n");
 
 // This way, we're able to use the data properly as JSON.
-var bodyParser = require('body-parser');
+var bodyParser = require("body-parser");
 
 // Modules relating to user accounts
-var sha512 = require('js-sha512').sha512;
-var validator = require('validator');
-var crypto = require('crypto');
-var profanity = require('profanity-util');
+var sha512 = require("js-sha512").sha512;
+var validator = require("validator");
+var crypto = require("crypto");
+var profanity = require("profanity-util");
+var request = require("request");
 
 // The main user database, not to be confused with the session database
-var dataStore = require('nedb');
-var db = new dataStore({ filename: 'db', autoload: true });
+var dataStore = require("nedb");
+var db = new dataStore({ filename: "db", autoload: true });
+
+var debugMode = true;
 
 // import environment variables (do not uncomment this unless the variables are set)
 /*
@@ -26,7 +29,7 @@ var db = new dataStore({ filename: 'db', autoload: true });
     var apiKey = process.env.API_KEY;
 
     // check if the api key is valid, otherwise deny ANY functionality
-    if (sha512(apiKey + '') != "0b8d819370a076884785850fdb5278b17558b8f83efa7f989f5ccbc75e937e81ded485c1f5538e353daeef12727371228e370f4fe5628c431b4210e472ed2ca1") {
+    if (sha512(apiKey + "") != "0b8d819370a076884785850fdb5278b17558b8f83efa7f989f5ccbc75e937e81ded485c1f5538e353daeef12727371228e370f4fe5628c431b4210e472ed2ca1") {
        return { error: 401, text: "you shall not use this api" };
     }
 */
@@ -97,13 +100,13 @@ function databaseInsert(username, password, email, joinDate, salt) {
 }
 
 // login/signup routes
-router.post('/signup', function (req, res) {
+router.post("/signup", function (req, res) {
     // the sign up function
     // tl;dr - user creates an account, this makes sure everything is good
     // and if it is, allows it and saves it to the database
     var data = req.body;
 
-    // makes sure that they match, so that way people don't mess up accidentally
+    // makes sure that they match, so that way people don"t mess up accidentally
     if (data.password != data.confirmpass) { res.send(language.RSP_SIGNUP_UNMATCH_PASS); return; }
     if (data.email != data.confirmemail) { res.send(language.RSP_SIGNUP_UNMATCH_EMAIL); return; }
 
@@ -115,6 +118,14 @@ router.post('/signup', function (req, res) {
     var email = validator.normalizeEmail(validator.escape(data.email));
     var joinDateObject = new Date();
     var joinDate = joinDateObject.getTime();
+    var captcha = data.captcha;
+
+    // just verify that the captcha was fine on google's end
+    // shouldn't ever need to touch this
+    var v = {"Content-Type":"application/x-www-form-urlencoded"}
+    var y = {"secret":"6LelKgsUAAAAAGEowrblLVid6EFi-ZWwCHsr_kk4","response":captcha};
+    var p = {url:"https://www.google.com/recaptcha/api/siteverify",method:"POST",headers:v,form:y};
+    var r = request(p,function(h,e,k){if(!h&&e.statusCode==200){return k;}});
 
     // checks the database if the email and/or the username already exists
     db.find({$or: [{ "username": username }, { "email": email }]}, function (err, docs) {
@@ -131,10 +142,12 @@ router.post('/signup', function (req, res) {
                     res.send(language.RSP_SIGNUP_EMAIL_USED);
                     break;
             }
-        } else if (username.indexOf(' ') >= 0) {
+        } else if (username.indexOf(" ") >= 0) {
             res.send(language.RSP_SIGNUP_USER_NOWHTSPC);
         } else if (!validator.isEmail(email)) {
             res.send(language.RSP_SIGNUP_INVALID_EMAIL);
+        } else if (!debugMode && r.success != true) {
+            res.send("the captcha failed to validate, please refresh and try again");
         } else {
             if (!databaseInsert(username, password, email, joinDate, salt)) {
                 res.send(language.RSP_SIGNUP_ERROR + joinDate.toString());

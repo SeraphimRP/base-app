@@ -28,9 +28,9 @@
     "js-sha512": "^0.2.2",
     "lodash": "^4.15.0",
     "nedb": "^1.8.0",
-    "node-fetch": "^1.6.0",
     "nodemon": "^1.11.0",
     "profanity-util": "0.0.5",
+    "request": "^2.78.0",
     "validator": "^6.1.0"
   },
   "devDependencies": {
