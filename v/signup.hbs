@@ -12,6 +12,8 @@
                 {{PGTXT_SIGNUP_EMAIL}} <input name="email" type="text" placeholder="{{PGTXT_SIGNUP_EMAIL_PLC}}">
                 <br>
                 {{PGTXT_SIGNUP_CONEMAIL}} <input name="confirmemail" type="text" placeholder="{{PGTXT_SIGNUP_CONEMAIL_PLC}}">
+                <br>
+                <div class="g-recaptcha" data-sitekey="6LelKgsUAAAAANN_lJ42z00Sonieb4yiM9kjyxpJ"></div>
             </form>
             <input type="button" value="{{PG_SIGNUP}}" onClick="submit()">
         </div>
@@ -19,7 +21,13 @@
         <script type="text/javascript">
             function submit() {
                 var responseMessage = document.createElement('span');
-                $.post("/api/signup", $("#form").serializeObject(), function(data) {
+
+                var formObject = $("#form").serializeObject();
+                var captcha = grecaptcha.getResponse();
+                
+                formObject.captcha = captcha;
+
+                $.post("/api/signup", formObject, function(data) {
                     responseMessage.innerHTML = data;
                     $("span").hide();
                     $("#signup").append(responseMessage);
