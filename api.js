@@ -85,7 +85,7 @@ function isReserved(username) {
     return false;
 }
 
-function databaseInsert(username, password, email, joinDate, salt) {
+function databaseInsert(username, password, email, joinDate, salt, ip) {
     // inserts the data into the database, no kidding, right?
     // returns: boolean
 
