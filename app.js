@@ -1,5 +1,4 @@
 var chalk = require('chalk');
-var commander = require('commander');
 var express = require('express');
 var hbs = require('hbs');
 
