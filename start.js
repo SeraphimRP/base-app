@@ -1,27 +1,25 @@
 var chalk = require('chalk');
-var commander = require('commander');
 var app = require('./app');
+var api = require('./api');
 
 // settings
-var host = "127.0.0.1";
+var host = "0.0.0.0";
 var port = 5555;
+var server = app;
 
-// handle CLI arguments, and respond accordingly
-commander.version('1.0.0')
-         .option('-h, --host', 'set hostname [default: 127.0.0.1]')
-         .option('-p, --port', 'set port [default: 5555]')
-         .parse(process.argv);
-
-if (commander.host) {
-    host = commander.host;
+// https stuff
+if (!debugMode) {
+    var fs = require('fs');
+    var https = require('https');
+    var chain = fs.readFileSync('/etc/letsencrypt/live/retejo.me/fullchain.pem');
+    var privateKey = fs.readFileSync('/etc/letsencrypt/live/retejo.me/privkey.pem');
+    var server = https.createServer({key: privateKey, cert: chain}, app);
 }
 
-if (commander.port) {
-    port = commander.port;
-}
+
 
 // houston, we have lift off
-app.listen(port, host, function () {
+server.listen(port, host, function () {
     console.log(chalk.bold.cyan('Server started on ' +
                                 chalk.bold.green(host + ':' + port) + '.'));
 });
