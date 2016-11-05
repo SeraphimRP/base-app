@@ -123,7 +123,7 @@ router.post("/signup", function (req, res) {
     var v = {"Content-Type":"application/x-www-form-urlencoded"}
     var y = {"secret":"6LelKgsUAAAAAGEowrblLVid6EFi-ZWwCHsr_kk4","response":captcha};
     var p = {url:"https://www.google.com/recaptcha/api/siteverify",method:"POST",headers:v,form:y};
-    var r = request(p,function(h,e,k){if(!h&&e.statusCode==200){console.log(k);return k;}});
+    var r = request(p,function(h,e,k){if(!h&&e.statusCode==200){return k;}});
 
     // checks the database if the email and/or the username already exists
     db.find({$or: [{ "username": username }, { "email": email }]}, function (err, docs) {
