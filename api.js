@@ -38,11 +38,7 @@ router.use(function (req, res, next) {
     next();
 });
 
-var db;
-router.use(function (req, res, next) {
-    db = req.db;
-    next();
-});
+var db = app.db;
 
 // Ensure that the previously mentioned module is hooked in.
 router.use(bodyParser.urlencoded({ extended: false }));
