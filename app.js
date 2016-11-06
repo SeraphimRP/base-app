@@ -1,5 +1,4 @@
 var chalk = require('chalk');
-var commander = require('commander');
 var express = require('express');
 var hbs = require('hbs');
 
@@ -41,6 +40,7 @@ app.use(function(req, res, next) {
     next();
 });
 
+
 app.use('/api', api); // make sure the api routes are hooked up and working at /api
 
 // ensure that handlebars is the view engine on express' end
@@ -51,15 +51,18 @@ hbs.registerPartials(__dirname + '/v/part');
 // load the assets into their proper folder so the templates run smoothly
 app.use('/js',express.static(__dirname + '/assets/js'));
 app.use('/css',express.static(__dirname + '/assets/css'));
+app.use('/img',express.static(__dirname + '/assets/img'));
 
 // frontend routes
 app.get('/', function (req, res) {
     language.PG_TITLE = language.PG_HOME;
 
-    if (req.session.user) {
+    if (req.session.user && req.session.user.username) {
         language.name = req.session.user.username;
-    } else {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
         language.name = req.ip;
+        language.user = "";
     }
 
     res.render('home', language);
@@ -69,13 +72,63 @@ app.get('/debug', function (req, res) {
     res.json(req.session);
 });
 
+app.get('/about', function (req, res) {
+    language.PG_TITLE = language.PG_ABOUT;
+
+    if (req.session.user && req.session.user.username) {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
+        language.user = "";
+    }
+
+    res.render('about', language);
+});
+
+app.get('/directory', function (req, res) {
+    language.PG_TITLE = language.PG_DIRECTORY;
+
+    if (req.session.user && req.session.user.username) {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
+        language.user = "";
+    }
+
+    res.render('directory', language);
+});
+
+app.get('/contact', function (req, res) {
+    language.PG_TITLE = language.PG_CONTACT;
+
+    if (req.session.user && req.session.user.username) {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
+        language.user = "";
+    }
+
+    res.render('contact', language);
+});
+
 app.get('/login', function (req, res) {
     language.PG_TITLE = language.PG_LOGIN;
+
+    if (req.session.user && req.session.user.username) {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
+        language.user = "";
+    }
+
     res.render('login', language);
 });
 
 app.get('/signup', function (req, res) {
     language.PG_TITLE = language.PG_SIGNUP;
+
+    if (req.session.user && req.session.user.username) {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
+        language.user = "";
+    }
+
     res.render('signup', language);
 });
 

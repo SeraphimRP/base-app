@@ -20,6 +20,9 @@ var request = require("request");
 var dataStore = require("nedb");
 var db = new dataStore({ filename: "db", autoload: true });
 
+// the directory database, just for allowing users to show off their websites on the directory
+var dirDB = new dataStore({ filename: "directorydb", autoload: true });
+
 var debugMode = true;
 
 // NOTE: Change the reCAPTCHA stuff when we're going into production.
@@ -38,9 +41,13 @@ var debugMode = true;
 
 // pull the language ahead of time, saving us on
 // a billion calls to i18n.getLanguage()
-var language;
+var globalLanguage;
 router.use(function (req, res, next) {
-    language = i18n.getLanguage(req.session.language);
+    if (typeof req.session.language === "undefined") {
+        i18n.changeLanguage(req.session);
+    }
+
+    globalLanguage = i18n.getLanguage(req.session.language);
     next();
 });
 
@@ -85,12 +92,12 @@ function isReserved(username) {
     return false;
 }
 
-function databaseInsert(username, password, email, joinDate, salt) {
+function databaseInsert(username, password, email, joinDate, salt, ip) {
     // inserts the data into the database, no kidding, right?
     // returns: boolean
 
     // create a json object based on the values
-    var data = {"username": username, "password": password, "email": email, "joinDate": joinDate, "salt": salt};
+    var data = {"username": username, "password": password, "email": email, "joinDate": joinDate, "salt": salt, "ip": ip};
 
     db.insert(data, function (err, newDocument) {
         if (err != null) {
@@ -109,17 +116,18 @@ router.post("/signup", function (req, res) {
     var data = req.body;
 
     // makes sure that they match, so that way people don"t mess up accidentally
-    if (data.password != data.confirmpass) { res.json({ok: false, text: language.RSP_SIGNUP_UNMATCH_PASS}); return; }
-    if (data.email != data.confirmemail) { res.json({ok: false, text: language.RSP_SIGNUP_UNMATCH_EMAIL}); return; }
+    if (data.password != data.confirmpass) { res.json({ok: false, text: globalLanguage.RSP_SIGNUP_UNMATCH_PASS}); return; }
+    if (data.email != data.confirmemail) { res.json({ok: false, text: globalLanguage.RSP_SIGNUP_UNMATCH_EMAIL}); return; }
 
     // escape every input, hash the password (with a random salt), and create a join date
     var salt = crypto.randomBytes(16).toString("hex");
 
     var username = validator.escape(data.username);
     var password = sha512(validator.escape(data.password) + salt);
-    var email = validator.normalizeEmail(validator.escape(data.email));
+    var email = validator.escape(data.email);
     var joinDateObject = new Date();
     var joinDate = joinDateObject.getTime();
+    var ip = req.ip;
     var captcha = data.captcha;
 
     // just verify that the captcha was fine on google's end
@@ -133,28 +141,28 @@ router.post("/signup", function (req, res) {
     db.find({$or: [{ "username": username }, { "email": email }]}, function (err, docs) {
         // if cases handling what happens as a result of the data;
         if (isReserved(username)) {
-            res.json({ok: false, text: language.RSP_SIGNUP_USER_RESERVED});
+            res.json({ok: false, text: globalLanguage.RSP_SIGNUP_USER_RESERVED});
         } else if (docs.length != 0) {
             usernameOrEmail = (username === docs[0].username ? "username" : "email");
             switch (usernameOrEmail) {
                 case "username":
-                    res.json({ok: false, text: language.RSP_SIGNUP_USER_USED});
+                    res.json({ok: false, text: globalLanguage.RSP_SIGNUP_USER_USED});
                     break;
                 case "email":
-                    res.json({ok: false, text: language.RSP_SIGNUP_EMAIL_USED});
+                    res.json({ok: false, text: globalLanguage.RSP_SIGNUP_EMAIL_USED});
                     break;
             }
         } else if (username.indexOf(" ") >= 0) {
-            res.json({ok: false, text: language.RSP_SIGNUP_USER_NOWHTSPC});
+            res.json({ok: false, text: globalLanguage.RSP_SIGNUP_USER_NOWHTSPC});
         } else if (!validator.isEmail(email)) {
-            res.json({ok: false, text: language.RSP_SIGNUP_INVALID_EMAIL});
+            res.json({ok: false, text: globalLanguage.RSP_SIGNUP_INVALID_EMAIL});
         } else if (!debugMode && r.success != true) {
-            res.json({ok: false, text: "the captcha failed to validate, please refresh and try again"});
+            res.json({ok: false, text: globalLanguage.RSP_SIGNUP_INVALID_CAPTCHA});
         } else {
-            if (!databaseInsert(username, password, email, joinDate, salt)) {
-                res.json({ok: false, text: language.RSP_SIGNUP_ERROR + joinDate.toString()});
+            if (!databaseInsert(username, password, email, joinDate, salt, ip)) {
+                res.json({ok: false, text: globalLanguage.RSP_SIGNUP_ERROR + joinDate.toString()});
             } else {
-                res.json({ok: true, text: language.RSP_SIGNUP_SUCCESS});
+                res.json({ok: true, text: globalLanguage.RSP_SIGNUP_SUCCESS});
             }
         }
     });
@@ -163,46 +171,50 @@ router.post("/signup", function (req, res) {
 router.post("/login", function (req, res) {
     var data = req.body;
 
+    // for some reason, i need this, i don't know why
+    var tempLanguage = globalLanguage;
+
     var username = validator.escape(data.username);
 
     db.find({ "username": username }, function (err, docs) {
         if (docs.length != 0) {
-            var queryResult = docs[0];
-            var password = sha512(validator.escape(data.password) + queryResult.salt);
+            if (docs[0] != username) { // so the usernames have to be exact
+                var queryResult = docs[0];
+                var password = sha512(validator.escape(data.password) + queryResult.salt);
 
-            if (password != queryResult.password) {
-                res.json({ok: false, text: language.RSP_LOGIN_PASSWORD_ERROR});
+                if (password != queryResult.password) {
+                    res.json({ok: false, text: globalLanguage.RSP_LOGIN_PASSWORD_ERROR});
+                } else {
+                    // save the language so that way it doesn't change
+                    // when regeneration happens
+                    var languageName = req.session.language;
+                    var globalLanguage = i18n.getLanguage(languageName);
+
+                    // regenerate to avoid session fixation
+                    req.session.regenerate(function() {
+                        req.session.user = queryResult;
+                        req.session.language = languageName;
+
+                        res.json({ok: true, text: globalLanguage.RSP_LOGIN_SUCCESS});
+                    });
+                }
             } else {
-                // save the language so that way it doesn't change
-                // when regeneration happens
-                var languageName = req.session.language;
-                var language = i18n.getLanguage(languageName);
-
-                // regenerate to avoid session fixation
-                req.session.regenerate(function() {
-                    req.session.user = queryResult;
-                    req.session.language = languageName;
-
-                    res.json({ok: true, text: language.RSP_LOGIN_SUCCESS});
-                });
+                res.json({ok: false, text: tempLanguage.RSP_LOGIN_USERNAME_ERROR});
             }
         } else {
-            res.json({ok: false, text: language.RSP_LOGIN_USERNAME_ERROR});
+            res.json({ok: false, text: tempLanguage.RSP_LOGIN_USERNAME_ERROR});
         }
     });
 });
 
 router.get("/logout", function (req, res) {
-    if (req.session.user) {
-        req.session.destroy(function() {
-            res.json({ok: true, text: language.RSP_HOME_LOGOUT_SUCCESS});
-        });
-    } else {
-        // as much as we can destroy the session, because one always exists
-        // it's not really necessary to do as it's not like there's anything
-        // to destroy other than some IDs.
-        res.json({ok: true, text: language.RSP_HOME_LOGOUT_ERROR});
-    }
+    // i would've handled a case where it didn't destroy the session
+    // if there was no user logged in, but because of a weird bug
+    // i'll allow it anyways, it doesn't change the functionality
+
+    req.session.destroy(function() {
+            res.json({ok: true, text: globalLanguage.RSP_HOME_LOGOUT_SUCCESS});
+    });
 });
 
 
@@ -211,7 +223,7 @@ router.post("/change_language", function (req, res) {
     // the api wrapper for i18n.changeLanguage()
     var data = req.body;
     var result = i18n.changeLanguage(req.session, data.language);
-    res.send(result);
+    res.json({ok: result});
 });
 
 router.get("/id/:id", function (req, res) {

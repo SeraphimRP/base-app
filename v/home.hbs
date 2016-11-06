@@ -1,46 +1,40 @@
 {{> head}}
 
     <body>
-        <div id="content">
-            {{PGTXT_HOME_GREETING}} {{name}}
-            <br>
-            {{PGTXT_HOME_LOGOUT_MSG}} <input type="button" value="{{PGTXT_HOME_LOGOUT_BTN}}" onClick="logout()">
-            <br>
-            Language:
-            <form id="form">
-                <select name="language">
-                    <option value="english">English</option>
-                    <option value="esperanto">Esperanto</option>
-                    <option value="french">Français</option>
-                    <option value="german">Deutsch</option>
-                    <option value="greek">Ελληνικά</option>
-                    <option value="italian">Italiano</option>
-                    <option value="polish">Polski</option>
-                    <option value="russian">Русский</option>
-                    <option value="spanish">Español</option>
-                    <option value="ukrainian">Українська</option>
-                </select>
-                <input type="button" value="submit" onClick="changeLanguage()">
+        <div class="container">
+
+            {{> nav homeActive=true}}
+
+            <div class="jumbotron">
+                <h1>{{PGTXT_HOME_GREETING}}, {{name}}!</h1>
+                <p>{{PGTXT_HOME_INTRODUCTION}}</p>
+                <small>{{PGTXT_HOME_ASTERISK}}</small>
+            </div>
+
+            <div id="homecontent">
+                <h1>{{PGTXT_HOME_BENEFITS_Q}}</h1>
+                <dl class="dl-horizontal">
+                    <dt>{{PGTXT_HOME_BENEFIT_Q1}}</dt>
+                    <dl>&nbsp;&nbsp;{{PGTXT_HOME_BENEFIT_A1}}</dl>
+                    <dt>{{PGTXT_HOME_BENEFIT_Q2}}</dt>
+                    <dl>&nbsp;&nbsp;{{{PGTXT_HOME_BENEFIT_A2}}}</dl>
+                    <dt>{{PGTXT_HOME_BENEFIT_Q3}}</dt>
+                    <dl>&nbsp;&nbsp;{{PGTXT_HOME_BENEFIT_A3}}</dl>
+                    <dt>{{PGTXT_HOME_BENEFIT_Q4}}</dt>
+                    <dl>&nbsp;&nbsp;{{PGTXT_HOME_BENEFIT_A4}}</dl>
+                    <dt>{{PGTXT_HOME_BENEFIT_Q5}}</dt>
+                    <dl>&nbsp;&nbsp;{{PGTXT_HOME_BENEFIT_A5}}</dl>
+                </dl>
+
+                <hr>
+
+                <h1>{{PGTXT_HOME_CATCH_Q}}</h1>
+                <h4>{{PGTXT_HOME_CATCH_A1}}<br><br>
+                    {{PGTXT_HOME_CATCH_A2}}<br><br>
+                    {{PGTXT_HOME_CATCH_A3}}<br><br>
+                    {{PGTXT_HOME_CATCH_A4}}</h4>
+            </div>
         </div>
-
-        <script type="text/javascript">
-            function logout() {
-                var responseMessage = document.createElement('span');
-                $.get("/api/logout", function(data) {
-                    responseMessage.innerHTML = "<br>" + data;
-                    $("span").hide();
-                    $("#content").append(responseMessage);
-                });
-            }
-
-            function changeLanguage() {
-                $.post("/api/change_language", $("#form").serializeObject(), function(data) {
-                    if (data) {
-                        window.location.replace("/");
-                    }
-                });
-            }
-        </script>
     </body>
 
 {{> foot}}

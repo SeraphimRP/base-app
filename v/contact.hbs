@@ -1,0 +1,20 @@
+{{> head}}
+
+    <body>
+        <div class="container">
+
+            {{> nav contactActive=true}}
+
+            <div id="homecontent">
+                <h1>{{PGTXT_CONTACT_TITLE}}</h1>
+                <dl class="dl-horizontal" style="margin: 0 auto;width:50%;text-align:center;">
+                    <dt>{{PGTXT_SIGNUP_EMAIL_PLC}}</dt>
+                    <dl>&nbsp;&nbsp;<a href="mailto:team@retejo.me">team@retejo.me</a></dl>
+                    <dt>{{PGTXT_CONTACT_CHAT}}</dt>
+                    <dl>&nbsp;&nbsp;{{{PGTXT_CONTACT_CHATDESC}}}</dl>
+                </dl>
+            </div>
+        </div>
+    </body>
+
+{{> foot}}
