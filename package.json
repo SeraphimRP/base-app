@@ -28,6 +28,7 @@
     "lodash": "^4.15.0",
     "mocha": "^3.1.2",
     "nedb": "^1.8.0",
+    "newrelic": "^1.33.0",
     "nodemon": "^1.11.0",
     "profanity-util": "0.0.5",
     "request": "^2.78.0",
