@@ -1,9 +1,8 @@
+require('./newrelic');
+
 var chalk = require('chalk');
 var app = require('./app');
 var api = require('./api');
-
-// new relic
-require('./newrelic');
 
 // settings
 var host = "0.0.0.0";
