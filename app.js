@@ -10,9 +10,6 @@ var sessions = require('./sessions');
 var mongodb = require('mongodb');
 var db;
 
-// for travis builds
-var isLaunched = false;
-
 // use the api routes and the i18n handler
 var api = require('./api');
 var i18n = require('./i18n');
@@ -62,7 +59,6 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
     app.listen(port, host, function () {
         console.log(chalk.bold.cyan('Server started on ' +
                                     chalk.bold.green(host + ':' + port) + '.'));
-        isLaunched = true;
     });
 });
 

@@ -2,9 +2,7 @@ var request = require("supertest");
 var should = require("should");
 var app = require("./app");
 
-while (!app.isLaunched) {
-    // waiting...
-}
+console.log("starting at " + app.address);
 
 describe("API", function () {
     describe("Logins and Signups", function () {
