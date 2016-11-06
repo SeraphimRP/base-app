@@ -2,6 +2,7 @@
 // we use it as an attachment to our currently existing app.
 var express = require("express");
 var router = express.Router();
+var app = require('./app');
 
 // Import languages
 var i18n = require("./i18n");
@@ -17,7 +18,10 @@ var profanity = require("profanity-util");
 var request = require("request");
 
 // import app, just for the db
-var db = require('./app').db;
+var db;
+app.on("appStarted", function () {
+    db = req.db;
+});
 
 var debugMode = true;
 
