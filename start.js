@@ -3,7 +3,7 @@ var app = require('./app');
 var api = require('./api');
 
 // new relic
-require('newrelic');
+require('./newrelic');
 
 // settings
 var host = "0.0.0.0";
