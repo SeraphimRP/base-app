@@ -13,7 +13,7 @@
     "PGTXT_GLOBAL_LANGUAGE":"Lingvo",
     "PGTXT_GLOBAL_COPYRIGHT":"Kopirajto © 2016 La Retejo.me Teamo (kaj kontribuantoj). Ĉioj rajtoj rezervis.",
 
-    "PGTXT_HOME_GREETING":"Saluton",
+    "PGTXT_HOME_GREETING":"Saluton al mondo!",
     "PGTXT_HOME_INTRODUCTION":"Bonvenon al Retejo.me, senpagaj kaj malfermitkodaj retgastigoj-servo por Esperantistoj! Se vi estas Esperantisto kaj vi estas scivola en kelkaj senpagaj retgastigoj*, eble por Esperanta blogo aŭ Esperanta versio de via retpaĝo, alklaku la Registriĝi butono super.",
     "PGTXT_HOME_ASTERISK":"* permana aprobo el estrano estas bezonata, gastigoj ne estas garantianta",
     "PGTXT_HOME_LOGOUT_BTN":"Elsaluti",
@@ -50,7 +50,7 @@
     "PGTXT_ABOUT_A42":"La restaĵo estas propra kodo de @vypr (nur por Retejo.me!)",
     "PGTXT_ABOUT_Q5":"Kio sekurecon havas Retejo.me?",
     "PGTXT_ABOUT_A51":"Ni funkcias kun SSL, kiu <a href=\"https://letsencrypt.org/\">LetsEncrypt</a> donas al nin.",
-    "PGTXT_ABOUT_A52":"Sekva, ni ĉifras pasvortojn kun SHA256 kaj hazarda generinta datumon. Rigardu al <a href=\"https://i.imgur.com/Jl2Usms.png\">ĉi tien</a>!",
+    "PGTXT_ABOUT_A52":"Sekva, ni ĉifras pasvortojn kun SHA512 kaj hazarda generinta datumon. Rigardu al <a href=\"https://i.imgur.com/Jl2Usms.png\">ĉi tien</a>!",
     "PGTXT_ABOUT_A53":"(kaj tiu nur la ĉifrinta version de \"password\" + la hazarda datumo)",
     "PGTXT_ABOUT_Q6":"Kio Retejo.me protokolas, kiam mi faras konton?",
     "PGTXT_ABOUT_A61":"Salutnomo, ĉifrinta pasvorton, retpoŝtadreson, dato de aliĝanta, IP-adreso, kaj la hazarda ĉifrinta datumon.",

@@ -13,7 +13,7 @@
     "PGTXT_GLOBAL_LANGUAGE":"Language",
     "PGTXT_GLOBAL_COPYRIGHT":"Copyright © 2016 The Retejo.me Team (and contributors). All rights reserved.",
 
-    "PGTXT_HOME_GREETING":"Hello",
+    "PGTXT_HOME_GREETING":"Hello, world!",
     "PGTXT_HOME_INTRODUCTION":"Welcome to Retejo.me, a free and open source hosting service for Esperanto speakers! If you're an Esperanto speaker and you're interested in some free hosting*, maybe for an Esperanto blog or an Esperanto version of your website, click the Signup button above.",
     "PGTXT_HOME_ASTERISK":"* manual approval by an administrator required, hosting is not guaranteed",
     "PGTXT_HOME_LOGOUT_BTN":"Logout",
@@ -48,7 +48,7 @@
     "PGTXT_ABOUT_A42":"The rest is custom-made code by @vypr (specifically for Retejo.me!)",
     "PGTXT_ABOUT_Q5":"What security measures does Retejo.me have?",
     "PGTXT_ABOUT_A51":"For starters, we are running with SSL, provided by <a href=\"https://letsencrypt.org/\">LetsEncrypt</a>.",
-    "PGTXT_ABOUT_A52":"Secondly, passwords are SHA256-hashed with a randomly generated salt. Take a look at <a href=\"https://i.imgur.com/Jl2Usms.png\">this</a>!",
+    "PGTXT_ABOUT_A52":"Secondly, passwords are SHA512-hashed with a randomly generated salt. Take a look at <a href=\"https://i.imgur.com/Jl2Usms.png\">this</a>!",
     "PGTXT_ABOUT_A53":"(and that's just the hashed version of \"password\" + the random salt)",
     "PGTXT_ABOUT_Q6":"What do you log when I make an account?",
     "PGTXT_ABOUT_A61":"Username, hashed password, email, join date, IP address, and the randomly generated salt.",
