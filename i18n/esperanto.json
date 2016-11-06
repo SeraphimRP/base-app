@@ -79,8 +79,13 @@
     "PGTXT_SIGNUP_TOSAGREE":"Mi konsentas kun la <a href=\"/tos\">servkondiĉoj</a> kaj <a href=\"/privpolicy\">privatecaj reguloj</a>.",
     "PGTXT_SIGNUP_REQUESTDIR":"Mi volas esti enlistiĝinta sur la Dosieruja paĝo.",
 
+    "PGTXT_DIRECTORY_WEBSITE_LINK":"Retpaĝo",
+    "PGTXT_DIRECTORY_WEBSITE_TITLE":"Titulo",
+    "PGTXT_DIRECTORY_WEBSITE_DESC":"Priskribo",
+
     "PGTXT_PROFILE_DETAILS":"Detaloj",
     "PGTXT_PROFILE_JOINDATE":"Registriĝis je:",
+    "PGTXT_PROFILE_NO_FRIENDS":"Nenio :c",
 
     "RSP_HOME_LOGOUT_SUCCESS":"Elsalutis sukcese.",
     "RSP_HOME_LOGOUT_ERROR":"Vi ne ensalutis.",

@@ -82,7 +82,19 @@ app.get('/about', function (req, res) {
     }
 
     res.render('about', language);
-})
+});
+
+app.get('/directory', function (req, res) {
+    language.PG_TITLE = language.PG_DIRECTORY;
+
+    if (req.session.user && req.session.user.username) {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
+        language.user = "";
+    }
+
+    res.render('directory', language);
+});
 
 app.get('/login', function (req, res) {
     language.PG_TITLE = language.PG_LOGIN;

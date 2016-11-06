@@ -76,6 +76,10 @@
     "PGTXT_SIGNUP_TOSAGREE":"I agree to the <a href=\"/tos\">terms of service</a> and <a href=\"/privpolicy\">privacy policy</a>.",
     "PGTXT_SIGNUP_REQUESTDIR":"I want my website to be listed on the Directory page.",
 
+    "PGTXT_DIRECTORY_WEBSITE_LINK":"Website",
+    "PGTXT_DIRECTORY_WEBSITE_TITLE":"Title",
+    "PGTXT_DIRECTORY_WEBSITE_DESC":"Description",
+
     "PGTXT_PROFILE_ADD_BTN":"Add as Friend",
     "PGTXT_PROFILE_DEL_BTN":"Delete as Friend",
     "PGTXT_PROFILE_DETAILS":"Details",
