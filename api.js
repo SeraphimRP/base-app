@@ -16,6 +16,9 @@ var crypto = require("crypto");
 var profanity = require("profanity-util");
 var request = require("request");
 
+// import app, just for the db
+var db = require('app').db;
+
 var debugMode = true;
 
 var captchaSecret = process.env.CAPTCHA_SECRET;
@@ -37,8 +40,6 @@ router.use(function (req, res, next) {
     globalLanguage = i18n.getLanguage(req.session.language);
     next();
 });
-
-var db = app.db;
 
 // Ensure that the previously mentioned module is hooked in.
 router.use(bodyParser.urlencoded({ extended: false }));
