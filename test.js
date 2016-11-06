@@ -2,6 +2,10 @@ var request = require("supertest");
 var should = require("should");
 var app = require("./app");
 
+while (!app.isLaunched) {
+    // waiting...
+}
+
 describe("API", function () {
     describe("Logins and Signups", function () {
         it("Should create a new user", function (done) {
