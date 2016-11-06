@@ -87,6 +87,11 @@
     "PGTXT_PROFILE_JOINDATE":"Registriĝis je:",
     "PGTXT_PROFILE_NO_FRIENDS":"Nenio :c",
 
+    "PGTXT_CONTACT_TITLE":"Kontaktu nin",
+    "PGTXT_CONTACT_CHAT":"Babilejo",
+    "PGTXT_CONTACT_CHATDESC":"<a href=\"https://discord.gg/Gyxy83x\">Diskordo</a> kaj <a href=\"https://telegram.me/joinchat/AXBufEAa4CgwFlN_Zaz6xg\">Telegramo</a>",
+
+
     "RSP_HOME_LOGOUT_SUCCESS":"Elsalutis sukcese.",
     "RSP_HOME_LOGOUT_ERROR":"Vi ne ensalutis.",
     "RSP_LOGIN_USERNAME_ERROR":"Nula salutnomo, kontaktu apogaro, se vi bezonas regajni vian konton.",

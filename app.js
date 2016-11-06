@@ -96,6 +96,18 @@ app.get('/directory', function (req, res) {
     res.render('directory', language);
 });
 
+app.get('/contact', function (req, res) {
+    language.PG_TITLE = language.PG_CONTACT;
+
+    if (req.session.user && req.session.user.username) {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
+        language.user = "";
+    }
+
+    res.render('contact', language);
+});
+
 app.get('/login', function (req, res) {
     language.PG_TITLE = language.PG_LOGIN;
 

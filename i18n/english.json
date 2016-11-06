@@ -87,6 +87,10 @@
     "PGTXT_PROFILE_WEBSITE":"Website: ",
     "PGTXT_PROFILE_NO_FRIENDS":"None :c",
 
+    "PGTXT_CONTACT_TITLE":"Contact Us",
+    "PGTXT_CONTACT_CHAT":"Chat",
+    "PGTXT_CONTACT_CHATDESC":"<a href=\"https://discord.gg/Gyxy83x\">Discord</a> and <a href=\"https://telegram.me/joinchat/AXBufEAa4CgwFlN_Zaz6xg\">Telegram</a>",
+
     "RSP_HOME_LOGOUT_SUCCESS":"Logged out successfully.",
     "RSP_HOME_LOGOUT_ERROR":"You are not logged in.",
 
