@@ -54,6 +54,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
         return {ok: false, text: "failed to connect to the database"};
     }
 
+    console.log(database);
+
     db = database;
 
     app.listen(port, host, function () {
