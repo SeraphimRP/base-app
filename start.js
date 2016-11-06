@@ -4,7 +4,7 @@ var api = require('./api');
 
 // settings
 var host = "0.0.0.0";
-var port = 5555;
+var port = (process.env.PORT || 5555);
 var server = app;
 
 // https stuff (uncomment for production)
