@@ -156,3 +156,5 @@ app.get('/signup', function (req, res) {
 app.get('/profile/:id', function (req, res) {
     // TODO
 });
+
+module.exports = app;

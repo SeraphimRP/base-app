@@ -1,20 +1,11 @@
 var request = require("supertest");
 var should = require("should");
-
-var exec = require('child_process').exec;
-var child = exec('npm start', function (error, stdout, stderr) {
-    console.log('stdout: ' + stdout);
-    console.log('stderr: ' + stderr);
-
-    if (error) {
-      console.log('exec error: ' + error);
-    }
-});
+var app = require("./app");
 
 describe("API", function () {
     describe("Logins and Signups", function () {
         it("Should create a new user", function (done) {
-            request(child)
+            request(app)
                     .post("/api/signup")
                     .set("Accept", "application/json")
                     .send({
@@ -34,7 +25,7 @@ describe("API", function () {
                     });
         });
         it("Should login successfully", function (done) {
-            request(child)
+            request(app)
                     .post("/api/login")
                     .set("Accept", "application/json")
                     .send({
@@ -51,7 +42,7 @@ describe("API", function () {
                 });
         });
         it("Should notify that the username already exists", function (done) {
-            request(child)
+            request(app)
                     .post("/api/signup")
                     .set("Accept", "application/json")
                     .send({
@@ -71,7 +62,7 @@ describe("API", function () {
                     });
         });
         it("Should notify that the email already exists", function (done) {
-            request(child)
+            request(app)
                     .post("/api/signup")
                     .set("Accept", "application/json")
                     .send({
@@ -91,7 +82,7 @@ describe("API", function () {
                     });
         });
         it("Should notify that the password and password confirmation are not the same", function (done) {
-            request(child)
+            request(app)
                     .post("/api/signup")
                     .set("Accept", "application/json")
                     .send({
@@ -111,7 +102,7 @@ describe("API", function () {
                     });
         });
         it("Should notify that the email and email confirmation are not the same", function (done) {
-            request(child)
+            request(app)
                     .post("/api/signup")
                     .set("Accept", "application/json")
                     .send({

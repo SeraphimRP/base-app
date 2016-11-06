@@ -18,13 +18,13 @@ var request = require("request");
 
 var debugMode = true;
 
-/*var captchaSecret = process.env.CAPTCHA_SECRET;
+var captchaSecret = process.env.CAPTCHA_SECRET;
 var apiKey = process.env.API_KEY;
 
 // check if the api key is valid, otherwise deny ANY functionality
 if (sha512(apiKey) != "f727a23af0ec14964264f4b5b4662c7fd765e9e6404eb52f720609fe3521cdf8f7fe6c819d7396050149272edf6ce0723e18eccbc3b2eb2310a677e835b033f0") {
     return { error: 401, text: "you shall not use this api" };
-}*/
+}
 
 // pull the language ahead of time, saving us on
 // a billion calls to i18n.getLanguage()
@@ -125,7 +125,7 @@ router.post("/signup", function (req, res) {
     // just verify that the captcha was fine on google's end
     // shouldn't ever need to touch this
     var v = {"Content-Type":"application/x-www-form-urlencoded"}
-    var y = {"secret":6LelKgsUAAAAAGEowrblLVid6EFi-ZWwCHsr_kk4,"response":captcha};
+    var y = {"secret":process.env.CAPTCHA_SECRET,"response":captcha};
     var p = {url:"https://www.google.com/recaptcha/api/siteverify",method:"POST",headers:v,form:y};
     var r = request(p,function(h,e,k){if(!h&&e.statusCode==200){return k;}});
 
