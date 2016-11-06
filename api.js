@@ -17,9 +17,6 @@ var crypto = require("crypto");
 var profanity = require("profanity-util");
 var request = require("request");
 
-// import db from app
-var db = app.db;
-
 var debugMode = true;
 
 var captchaSecret = process.env.CAPTCHA_SECRET;
@@ -39,6 +36,13 @@ router.use(function (req, res, next) {
     }
 
     globalLanguage = i18n.getLanguage(req.session.language);
+    next();
+});
+
+// see if this fixes the db issues
+var db;
+router.use(function (req, res, next) {
+    db = req.db;
     next();
 });
 
@@ -89,7 +93,7 @@ function databaseInsert(username, password, email, joinDate, salt, ip) {
     // create a json object based on the values
     var data = {"username": username, "password": password, "email": email, "joinDate": joinDate, "salt": salt, "ip": ip};
 
-    db.users.insertOne(data, function (err, doc) {
+    db.collection("users").insertOne(data, function (err, doc) {
         if (err) {
             return false;
         }
@@ -128,7 +132,7 @@ router.post("/signup", function (req, res) {
     var r = request(p,function(h,e,k){if(!h&&e.statusCode==200){return k;}});
 
     // checks the database if the email and/or the username already exists
-    db.users.find({$or: [{ "username": username }, { "email": email }]}).toArray(function (err, docs) {
+    db.collection("users").find({$or: [{ "username": username }, { "email": email }]}).toArray(function (err, docs) {
         // if cases handling what happens as a result of the data;
         if (isReserved(username)) {
             res.json({ok: false, text: globalLanguage.RSP_SIGNUP_USER_RESERVED});
@@ -166,7 +170,7 @@ router.post("/login", function (req, res) {
 
     var username = validator.escape(data.username);
 
-    db.users.find({ "username": username }).toArray(function (err, docs) {
+    db.collection("users").find({ "username": username }).toArray(function (err, docs) {
         if (docs.length != 0) {
             if (docs[0] != username) { // so the usernames have to be exact
                 var queryResult = docs[0];
@@ -220,7 +224,7 @@ router.get("/id/:id", function (req, res) {
     // an api call for pulling the data of the user, will be used later, ignore for now
     res.set("Content-Type", "application/json");
 
-    db.users.find({ _id: req.params.id }).toArray(function (err, result) {
+    db.collection("users").find({ _id: req.params.id }).toArray(function (err, result) {
         res.send(JSON.stringify(result[0]));
 
         if (err != null) {

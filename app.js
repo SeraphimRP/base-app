@@ -51,11 +51,10 @@ hbs.registerPartials(__dirname + '/v/part');
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
     if (err) {
         console.log(err);
-        return {ok: false, text: "failed to connect to the database"};
+        return;
     }
 
-    console.log(database.users)
-
+    // Save database object from the callback for reuse.
     db = database;
 
     app.listen(port, host, function () {
