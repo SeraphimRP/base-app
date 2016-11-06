@@ -44,3 +44,4 @@ jspm_packages
 # Database files
 db
 sessiondb
+directorydb
