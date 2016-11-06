@@ -13,7 +13,7 @@
     "PGTXT_GLOBAL_LANGUAGE":"Language",
     "PGTXT_GLOBAL_COPYRIGHT":"Copyright © 2016 The Retejo.me Team (and contributors). All rights reserved.",
 
-    "PGTXT_HOME_GREETING":"Hello",
+    "PGTXT_HOME_GREETING":"Hello, world!",
     "PGTXT_HOME_INTRODUCTION":"Welcome to Retejo.me, a free and open source hosting service for Esperanto speakers! If you're an Esperanto speaker and you're interested in some free hosting*, maybe for an Esperanto blog or an Esperanto version of your website, click the Signup button above.",
     "PGTXT_HOME_ASTERISK":"* manual approval by an administrator required, hosting is not guaranteed",
     "PGTXT_HOME_LOGOUT_BTN":"Logout",
