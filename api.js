@@ -17,7 +17,7 @@ var crypto = require("crypto");
 var profanity = require("profanity-util");
 var request = require("request");
 
-var debugMode = true;
+var debugMode = process.env.DEBUG_MODE;
 
 var captchaSecret = process.env.CAPTCHA_SECRET;
 var apiKey = process.env.API_KEY;
@@ -59,11 +59,9 @@ function isReserved(username) {
                               "mod", "administrator", "support" ];
 
     // development usage only
-    /*
-        if (username.includes("test") || username.includes("retejo")) {
-            return true;
-        }
-    */
+    if (username.includes("test") || username.includes("retejo")) {
+        return true;
+    }
 
     // profanity checks
     if (profanity.check(username).length != 0) {
