@@ -48,7 +48,7 @@
     "PGTXT_ABOUT_A42":"The rest is custom-made code by @vypr (specifically for Retejo.me!)",
     "PGTXT_ABOUT_Q5":"What security measures does Retejo.me have?",
     "PGTXT_ABOUT_A51":"For starters, we are running with SSL, provided by <a href=\"https://letsencrypt.org/\">LetsEncrypt</a>.",
-    "PGTXT_ABOUT_A52":"Secondly, passwords are SHA256-hashed with a randomly generated salt. Take a look at <a href=\"https://i.imgur.com/Jl2Usms.png\">this</a>!",
+    "PGTXT_ABOUT_A52":"Secondly, passwords are SHA512-hashed with a randomly generated salt. Take a look at <a href=\"https://i.imgur.com/Jl2Usms.png\">this</a>!",
     "PGTXT_ABOUT_A53":"(and that's just the hashed version of \"password\" + the random salt)",
     "PGTXT_ABOUT_Q6":"What do you log when I make an account?",
     "PGTXT_ABOUT_A61":"Username, hashed password, email, join date, IP address, and the randomly generated salt.",
