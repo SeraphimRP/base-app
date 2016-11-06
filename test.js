@@ -2,14 +2,14 @@ var request = require("supertest");
 var should = require("should");
 
 var exec = require('child_process').exec,
-exec('npm start', function (error, stdout, stderr) {
+var child = exec('npm start', function (error, stdout, stderr) {
     console.log('stdout: ' + stdout);
     console.log('stderr: ' + stderr);
 
     if (error) {
       console.log('exec error: ' + error);
     }
-});
+})();
 
 describe("API", function () {
     describe("Logins and Signups", function () {
