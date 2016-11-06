@@ -53,6 +53,9 @@ app.use('/js',express.static(__dirname + '/assets/js'));
 app.use('/css',express.static(__dirname + '/assets/css'));
 app.use('/img',express.static(__dirname + '/assets/img'));
 
+// letsencrypt verification
+app.use('/.well-known',express.static(__dirname + '/assets/.well-known'));
+
 // frontend routes
 app.get('/', function (req, res) {
     language.PG_TITLE = language.PG_HOME;
