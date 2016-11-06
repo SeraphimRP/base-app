@@ -52,9 +52,12 @@ hbs.registerPartials(__dirname + '/v/part');
 app.use('/js',express.static(__dirname + '/assets/js'));
 app.use('/css',express.static(__dirname + '/assets/css'));
 app.use('/img',express.static(__dirname + '/assets/img'));
+app.use('/browserconfig.xml',express.static(__dirname + '/assets/browserconfig.xml'));
+app.use('/manifest.json',express.static(__dirname + '/assets/manifest.json'));
 
 // letsencrypt verification
 app.use('/.well-known',express.static(__dirname + '/assets/.well-known'));
+
 
 // frontend routes
 app.get('/', function (req, res) {
