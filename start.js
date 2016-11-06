@@ -1,4 +1,4 @@
-require('./newrelic');
+require('newrelic');
 
 var chalk = require('chalk');
 var app = require('./app');
