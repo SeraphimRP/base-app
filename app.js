@@ -59,6 +59,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
     app.listen(port, host, function () {
         console.log(chalk.bold.cyan('Server started on ' +
                                     chalk.bold.green(host + ':' + port) + '.'));
+
+        app.emit("appStarted");
     });
 });
 
