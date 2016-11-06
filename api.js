@@ -18,10 +18,7 @@ var profanity = require("profanity-util");
 var request = require("request");
 
 // import app, just for the db
-var db;
-app.on("appStarted", function () {
-    db = req.db;
-});
+var db = app.getDB();
 
 var debugMode = true;
 

@@ -159,4 +159,8 @@ app.get('/profile/:id', function (req, res) {
     // TODO
 });
 
+exports.getDB = function () {
+    return db;
+}
+
 module.exports = app;
