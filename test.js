@@ -2,10 +2,7 @@ var request = require("supertest");
 var should = require("should");
 
 var exec = require('child_process').exec,
-    child;
-
-child = exec('npm start',
-function (error, stdout, stderr) {
+exec('npm start', function (error, stdout, stderr) {
     console.log('stdout: ' + stdout);
     console.log('stderr: ' + stderr);
 
