@@ -16,13 +16,6 @@ var crypto = require("crypto");
 var profanity = require("profanity-util");
 var request = require("request");
 
-// The main user database, not to be confused with the session database
-var dataStore = require("nedb");
-var db = new dataStore({ filename: "db", autoload: true });
-
-// the directory database, just for allowing users to show off their websites on the directory
-var dirDB = new dataStore({ filename: "directorydb", autoload: true });
-
 var debugMode = true;
 
 // NOTE: Change the reCAPTCHA stuff when we're going into production.
@@ -47,6 +40,11 @@ router.use(function (req, res, next) {
     next();
 });
 
+var db;
+router.use(function (req, res, next) {
+    db = req.db;
+    next();
+});
 
 // Ensure that the previously mentioned module is hooked in.
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -95,8 +93,8 @@ function databaseInsert(username, password, email, joinDate, salt, ip) {
     // create a json object based on the values
     var data = {"username": username, "password": password, "email": email, "joinDate": joinDate, "salt": salt, "ip": ip};
 
-    db.insert(data, function (err, newDocument) {
-        if (err != null) {
+    db.collections("users").insertOne(data, function (err, doc) {
+        if (err) {
             return false;
         }
     });
@@ -129,12 +127,12 @@ router.post("/signup", function (req, res) {
     // just verify that the captcha was fine on google's end
     // shouldn't ever need to touch this
     var v = {"Content-Type":"application/x-www-form-urlencoded"}
-    var y = {"secret":"6LelKgsUAAAAAGEowrblLVid6EFi-ZWwCHsr_kk4","response":captcha};
+    var y = {"secret":process.env.CAPTCHA_SECRET,"response":captcha};
     var p = {url:"https://www.google.com/recaptcha/api/siteverify",method:"POST",headers:v,form:y};
     var r = request(p,function(h,e,k){if(!h&&e.statusCode==200){return k;}});
 
     // checks the database if the email and/or the username already exists
-    db.find({$or: [{ "username": username }, { "email": email }]}, function (err, docs) {
+    db.collections("users").find({$or: [{ "username": username }, { "email": email }]}).toArray(function (err, docs) {
         // if cases handling what happens as a result of the data;
         if (isReserved(username)) {
             res.json({ok: false, text: globalLanguage.RSP_SIGNUP_USER_RESERVED});
@@ -172,7 +170,7 @@ router.post("/login", function (req, res) {
 
     var username = validator.escape(data.username);
 
-    db.find({ "username": username }, function (err, docs) {
+    db.collections("users").find({ "username": username }.toArray(function (err, docs) {
         if (docs.length != 0) {
             if (docs[0] != username) { // so the usernames have to be exact
                 var queryResult = docs[0];
@@ -226,7 +224,7 @@ router.get("/id/:id", function (req, res) {
     // an api call for pulling the data of the user, will be used later, ignore for now
     res.set("Content-Type", "application/json");
 
-    db.find({ _id: req.params.id }, function (err, result) {
+    db.collections("users").find({ _id: req.params.id }).toArray(function (err, result) {
         res.send(JSON.stringify(result[0]));
 
         if (err != null) {
