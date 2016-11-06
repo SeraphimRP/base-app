@@ -170,7 +170,7 @@ router.post("/login", function (req, res) {
 
     var username = validator.escape(data.username);
 
-    db.collections("users").find({ "username": username }.toArray(function (err, docs) {
+    db.collections("users").find({ "username": username }).toArray(function (err, docs) {
         if (docs.length != 0) {
             if (docs[0] != username) { // so the usernames have to be exact
                 var queryResult = docs[0];
