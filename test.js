@@ -1,4 +1,3 @@
-var app = require("./app");
 var request = require("supertest");
 var should = require("should");
 
@@ -9,7 +8,7 @@ child = exec('npm start',
 function (error, stdout, stderr) {
     console.log('stdout: ' + stdout);
     console.log('stderr: ' + stderr);
-    
+
     if (error) {
       console.log('exec error: ' + error);
     }
@@ -18,7 +17,7 @@ function (error, stdout, stderr) {
 describe("API", function () {
     describe("Logins and Signups", function () {
         it("Should create a new user", function (done) {
-            request(app)
+            request("http://0.0.0.0:5555")
                     .post("/api/signup")
                     .set("Accept", "application/json")
                     .send({
@@ -38,7 +37,7 @@ describe("API", function () {
                     });
         });
         it("Should login successfully", function (done) {
-            request(app)
+            request("http://0.0.0.0:5555")
                     .post("/api/login")
                     .set("Accept", "application/json")
                     .send({
@@ -55,7 +54,7 @@ describe("API", function () {
                 });
         });
         it("Should notify that the username already exists", function (done) {
-            request(app)
+            request("http://0.0.0.0:5555")
                     .post("/api/signup")
                     .set("Accept", "application/json")
                     .send({
@@ -75,7 +74,7 @@ describe("API", function () {
                     });
         });
         it("Should notify that the email already exists", function (done) {
-            request(app)
+            request("http://0.0.0.0:5555")
                     .post("/api/signup")
                     .set("Accept", "application/json")
                     .send({
@@ -95,7 +94,7 @@ describe("API", function () {
                     });
         });
         it("Should notify that the password and password confirmation are not the same", function (done) {
-            request(app)
+            request("http://0.0.0.0:5555")
                     .post("/api/signup")
                     .set("Accept", "application/json")
                     .send({
@@ -115,7 +114,7 @@ describe("API", function () {
                     });
         });
         it("Should notify that the email and email confirmation are not the same", function (done) {
-            request(app)
+            request("http://0.0.0.0:5555")
                     .post("/api/signup")
                     .set("Accept", "application/json")
                     .send({
