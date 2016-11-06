@@ -14,7 +14,7 @@ var db;
 var api = require('./api');
 var i18n = require('./i18n');
 
-var app = express();
+var app = module.exports = express();
 
 // settings
 var host = "0.0.0.0";
@@ -158,9 +158,3 @@ app.get('/signup', function (req, res) {
 app.get('/profile/:id', function (req, res) {
     // TODO
 });
-
-exports.getDB = function () {
-    return db;
-}
-
-module.exports = app;
