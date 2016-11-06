@@ -31,7 +31,7 @@ var captchaSecret = process.env.CAPTCHA_SECRET;
 var apiKey = process.env.API_KEY;
 
 // check if the api key is valid, otherwise deny ANY functionality
-if (sha512(apiKey + "") != "0b8d819370a076884785850fdb5278b17558b8f83efa7f989f5ccbc75e937e81ded485c1f5538e353daeef12727371228e370f4fe5628c431b4210e472ed2ca1") {
+if (sha512(apiKey) != "0b8d819370a076884785850fdb5278b17558b8f83efa7f989f5ccbc75e937e81ded485c1f5538e353daeef12727371228e370f4fe5628c431b4210e472ed2ca1") {
     return { error: 401, text: "you shall not use this api" };
 }
 
