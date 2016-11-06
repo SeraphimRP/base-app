@@ -11,7 +11,7 @@
     <script type="text/javascript">
         function login() {
             var responseMessage = document.createElement("p");
-            responseMessage.className = "loginerror bg-danger";
+            responseMessage.className = "formerror bg-danger";
             $.post("/api/login", $("#loginform").serializeObject(), function(data) {
                 if (data.ok != true) {
                     responseMessage.innerHTML = data.text;

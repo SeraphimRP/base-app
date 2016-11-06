@@ -5,7 +5,7 @@
 
             {{> nav signupActive=true}}
 
-            <form class="form-horizontal">
+            <form id="signupform" class="form-horizontal">
             <fieldset>
 
             <!-- Form Name -->
@@ -61,7 +61,17 @@
               <div class="col-md-4">
                 <label class="checkbox-inline" for="checkboxes-0">
                   <input type="checkbox" name="checkboxes" id="checkboxes-0" value="agreetos">
-                  {{PGTXT_SIGNUP_TOSAGREE}}
+                  {{{PGTXT_SIGNUP_TOSAGREE}}}
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="checkboxes1"></label>
+              <div class="col-md-4">
+                <label class="checkbox-inline" for="checkboxes-1">
+                  <input type="checkbox" name="checkboxes1" id="checkboxes-1" value="placeondirectory">
+                  {{{PGTXT_SIGNUP_REQUESTDIR}}}
                 </label>
               </div>
             </div>
@@ -72,33 +82,38 @@
                     <div class="g-recaptcha" data-sitekey="6LelKgsUAAAAANN_lJ42z00Sonieb4yiM9kjyxpJ"></div>
                 </div>
             </div>
+            </fieldset>
+            </form>
 
-            <!-- Button -->
             <div class="form-group">
               <label class="col-md-4 control-label" for="null"></label>
               <div class="col-md-4">
-                <button id="submit" name="submit" class="btn btn-primary">{{PG_SIGNUP}}</button>
+                <button id="null" name="null" class="btn btn-primary" onclick="submit()">{{PG_SIGNUP}}</button>
               </div>
             </div>
-
-            </fieldset>
-            </form>
 
         </div>
 
         <script type="text/javascript">
-            function submit() {
-                var responseMessage = document.createElement('span');
+            function htmlToElement(html) {
+                var template = document.createElement('template');
+                template.innerHTML = html;
+                return template.content.firstChild;
+            }
 
-                var formObject = $("#form").serializeObject();
+            function submit() {
+                var formObject = $("#signupform").serializeObject();
                 var captcha = grecaptcha.getResponse();
 
                 formObject.captcha = captcha;
 
+                console.log(formObject);
+
                 $.post("/api/signup", formObject, function(data) {
-                    responseMessage.innerHTML = data.text;
-                    $("span").hide();
-                    $("#signup").append(responseMessage);
+                    var input = '<div id="errormsg" class="form-group"><br><label class="col-md-4 control-label" for="null"></label><div class="col-md-4"><p class="formerror bg-danger">' + data.text + '</p></div></div>';
+                    var output = htmlToElement(input);
+                    $("#errormsg").hide();
+                    $(".form-group").last().after(output);
                 });
             }
         </script>

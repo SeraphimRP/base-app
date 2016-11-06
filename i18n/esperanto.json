@@ -77,6 +77,7 @@
     "PGTXT_SIGNUP_CONEMAIL":"Konfirmu Retpoŝtadreson:",
     "PGTXT_SIGNUP_CONEMAIL_PLC":"Konfirmu Vian Retpoŝtadreson",
     "PGTXT_SIGNUP_TOSAGREE":"Mi konsentas kun la <a href=\"/tos\">servkondiĉoj</a> kaj <a href=\"/privpolicy\">privatecaj reguloj</a>.",
+    "PGTXT_SIGNUP_REQUESTDIR":"Mi volas esti enlistiĝinta sur la Dosieruja paĝo.",
 
     "PGTXT_PROFILE_DETAILS":"Detaloj",
     "PGTXT_PROFILE_JOINDATE":"Registriĝis je:",

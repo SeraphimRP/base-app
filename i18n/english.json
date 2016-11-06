@@ -74,6 +74,7 @@
     "PGTXT_SIGNUP_CONEMAIL":"Confirm Email:",
     "PGTXT_SIGNUP_CONEMAIL_PLC":"Confirm Your Email",
     "PGTXT_SIGNUP_TOSAGREE":"I agree to the <a href=\"/tos\">terms of service</a> and <a href=\"/privpolicy\">privacy policy</a>.",
+    "PGTXT_SIGNUP_REQUESTDIR":"I want my website to be listed on the Directory page.",
 
     "PGTXT_PROFILE_ADD_BTN":"Add as Friend",
     "PGTXT_PROFILE_DEL_BTN":"Delete as Friend",

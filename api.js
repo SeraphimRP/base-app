@@ -124,7 +124,7 @@ router.post("/signup", function (req, res) {
 
     var username = validator.escape(data.username);
     var password = sha512(validator.escape(data.password) + salt);
-    var email = validator.normalizeEmail(validator.escape(data.email));
+    var email = validator.escape(data.email);
     var joinDateObject = new Date();
     var joinDate = joinDateObject.getTime();
     var ip = req.ip;
@@ -156,8 +156,8 @@ router.post("/signup", function (req, res) {
             res.json({ok: false, text: globalLanguage.RSP_SIGNUP_USER_NOWHTSPC});
         } else if (!validator.isEmail(email)) {
             res.json({ok: false, text: globalLanguage.RSP_SIGNUP_INVALID_EMAIL});
-        } else if (!debugMode && r.success != true) {
-            res.json({ok: false, text: "the captcha failed to validate, please refresh and try again"});
+        } else if (r.success != true) {
+            res.json({ok: false, text: globalLanguage.RSP_SIGNUP_INVALID_CAPTCHA});
         } else {
             if (!databaseInsert(username, password, email, joinDate, salt, ip)) {
                 res.json({ok: false, text: globalLanguage.RSP_SIGNUP_ERROR + joinDate.toString()});
