@@ -15,7 +15,7 @@ var app = express();
 // the secret will be process.env.COOKIE_SECRET
 // but for now, we're just gonna use a test one
 app.use(session({
-    secret: "bananasaregreat",
+    secret: process.env.COOKIE_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
