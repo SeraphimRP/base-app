@@ -3,16 +3,14 @@ var chalk = require('chalk');
 var express = require('express');
 var hbs = require('hbs');
 
+var i18n = require('./i18n');
+
 // session-related things
 var sessions = require('./sessions');
 
 // database stuff
 var mongodb = require('mongodb');
 var db;
-
-// use the api routes and the i18n handler
-var api = require('./api');
-var i18n = require('./i18n');
 
 var app = module.exports = express();
 
@@ -63,6 +61,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
         app.emit("appStarted");
     });
 });
+
+var api = require('./api');
 
 app.use('/api', api); // make sure the api routes are hooked up and working at /api
 
