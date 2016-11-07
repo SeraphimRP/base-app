@@ -20,7 +20,11 @@
                 {{else}}
                 <li><a href="/directory">{{PG_DIRECTORY}}</a></li>
                 {{/if}}
-                <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HHJW74D3TZFT2">{{PG_DONATE}}</a></li>
+                {{#if donateActive}}
+                <li class="active"><a href="/donate">{{PG_DONATE}}</a></li>
+                {{else}}
+                <li><a href="/donate">{{PG_DONATE}}</a></li>
+                {{/if}}
                 {{#if contactActive}}
                 <li class="active"><a href="/contact">{{PG_CONTACT}}</a></li>
                 {{else}}

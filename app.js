@@ -20,8 +20,6 @@ var app = module.exports = express();
 var host = "0.0.0.0";
 var port = (process.env.PORT || 5555);
 
-// the secret will be process.env.COOKIE_SECRET
-// but for now, we're just gonna use a test one
 app.use(sessions(process.env.REDIS_URL, process.env.COOKIE_SECRET));
 
 // ensure that a language is set for every session
@@ -118,6 +116,18 @@ app.get('/directory', function (req, res) {
     }
 
     res.render('directory', language);
+});
+
+app.get('/donate', function (req, res) {
+    language.PG_TITLE = language.PG_DONATE;
+
+    if (req.session.user && req.session.user.username) {
+        language.user = req.session.user;
+    } else if (req.session.user === undefined) {
+        language.user = "";
+    }
+
+    res.render('donate', language);
 });
 
 app.get('/contact', function (req, res) {
