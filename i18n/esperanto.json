@@ -52,7 +52,7 @@
     "PGTXT_ABOUT_Q5":"Kio sekurecon havas Retejo.me?",
     "PGTXT_ABOUT_A51":"Ni funkcias kun SSL, kiu <a href=\"https://letsencrypt.org/\">LetsEncrypt</a> donas al nin.",
     "PGTXT_ABOUT_A52":"Sekva, ni ĉifras pasvortojn kun SHA512 kaj hazarda generinta datumon. Rigardu al <a href=\"https://i.imgur.com/Jl2Usms.png\">ĉi tien</a>!",
-    "PGTXT_ABOUT_A53":"(kaj tiu nur la ĉifrinta version de \"password\" + la hazarda datumo)",
+    "PGTXT_ABOUT_A53":"(kaj tiu nur estas la ĉifrinta version de \"password\" + la hazarda datumo)",
     "PGTXT_ABOUT_Q6":"Kio Retejo.me protokolas, kiam mi faras konton?",
     "PGTXT_ABOUT_A61":"Salutnomo, ĉifrinta pasvorton, retpoŝtadreson, dato de aliĝanta, IP-adreso, kaj la hazarda ĉifrinta datumon.",
     "PGTXT_ABOUT_A62":"Ni nur uzos vian retpoŝtadreson kaj IP-adreson por sekureco, kiel se iu kodumos vian konton.",
