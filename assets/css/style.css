@@ -118,3 +118,9 @@ body {
 #signupform {
     padding-top: 20px !important;
 }
+
+.dl-horizontal dt
+{
+    white-space: normal;
+    width: 200px;
+}
