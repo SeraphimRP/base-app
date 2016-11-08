@@ -124,3 +124,9 @@ body {
     white-space: normal;
     width: 200px;
 }
+
+@media (min-width: 992px) {
+    .navbar-toggle {
+        display: none !important;
+    }
+}
