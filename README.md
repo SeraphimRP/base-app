@@ -1,7 +1,7 @@
 # Retejo.me
 [![Build Status](https://travis-ci.org/retejo/retejo.me.svg?branch=master)](https://travis-ci.org/retejo/retejo.me)
 
-A FOSS web hosting service for Esperanto speakers.
+A web hosting service for Esperanto speakers.
 
 --
 
