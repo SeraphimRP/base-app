@@ -1,7 +1,7 @@
 {
   "name": "retejo.me",
   "version": "1.0.0",
-  "description": "a foss web hosting service for Esperanto speakers",
+  "description": "a web hosting service for Esperanto speakers",
   "main": "app.js",
   "scripts": {
     "test": "mocha test.js",
