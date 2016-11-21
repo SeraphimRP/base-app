@@ -1,7 +1,14 @@
 # Retejo.me
-[![Build Status](https://travis-ci.org/retejo/retejo.me.svg?branch=master)](https://travis-ci.org/retejo/retejo.me)
+[![Build Status](https://travis-ci.org/retejo/legacy.svg?branch=master)](https://travis-ci.org/retejo/legacy)
 
 A web hosting service for Esperanto speakers.
+
+--
+
+Note:
+======
+
+This code will no longer be updated, unless repurposed later, all pull requests will be closed and the Travis-CI build will most likely fail because it can't connect to the redis server that we originally had.
 
 --
 
