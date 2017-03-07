@@ -19,11 +19,11 @@ var request = require("request");
 
 var debugMode = process.env.DEBUG_MODE;
 
-var captchaSecret = process.env.CAPTCHA_SECRET;
+//var captchaSecret = process.env.CAPTCHA_SECRET;
 var apiKey = process.env.API_KEY;
 
 // check if the api key is valid, otherwise deny ANY functionality
-if (sha512(apiKey) != "f727a23af0ec14964264f4b5b4662c7fd765e9e6404eb52f720609fe3521cdf8f7fe6c819d7396050149272edf6ce0723e18eccbc3b2eb2310a677e835b033f0") {
+if (sha512(apiKey) != "e4e667492eb5a4ffd0f7d85354e5f0c67afe434db36503cdc40e8b62351fc5a02002c748f4620a6070d3ba7ffafef86bedbad83aedd4bfa32590790456db2ac0") {
     return { error: 401, text: "you shall not use this api" };
 }
 
@@ -124,10 +124,10 @@ router.post("/signup", function (req, res) {
 
     // just verify that the captcha was fine on google's end
     // shouldn't ever need to touch this
-    var v = {"Content-Type":"application/x-www-form-urlencoded"}
+    /*var v = {"Content-Type":"application/x-www-form-urlencoded"}
     var y = {"secret":process.env.CAPTCHA_SECRET,"response":captcha};
     var p = {url:"https://www.google.com/recaptcha/api/siteverify",method:"POST",headers:v,form:y};
-    var r = request(p,function(h,e,k){if(!h&&e.statusCode==200){return k;}});
+    var r = request(p,function(h,e,k){if(!h&&e.statusCode==200){return k;}});*/
 
     // checks the database if the email and/or the username already exists
     db.collection("users").find({$or: [{ "username": username }, { "email": email }]}).toArray(function (err, docs) {
