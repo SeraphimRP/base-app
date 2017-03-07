@@ -148,8 +148,8 @@ router.post("/signup", function (req, res) {
             res.json({ok: false, text: globalLanguage.RSP_SIGNUP_USER_NOWHTSPC});
         } else if (!validator.isEmail(email)) {
             res.json({ok: false, text: globalLanguage.RSP_SIGNUP_INVALID_EMAIL});
-        } else if (!debugMode && r.success != true) {
-            res.json({ok: false, text: globalLanguage.RSP_SIGNUP_INVALID_CAPTCHA});
+        //} else if (!debugMode && r.success != true) {
+        //    res.json({ok: false, text: globalLanguage.RSP_SIGNUP_INVALID_CAPTCHA});
         } else {
             if (!databaseInsert(username, password, email, joinDate, salt, ip)) {
                 res.json({ok: false, text: globalLanguage.RSP_SIGNUP_ERROR + joinDate.toString()});
