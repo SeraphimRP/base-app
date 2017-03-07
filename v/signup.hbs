@@ -103,11 +103,11 @@
 
             function submit() {
                 var formObject = $("#signupform").serializeObject();
-                var captcha = grecaptcha.getResponse();
+                /*var captcha = grecaptcha.getResponse();
 
                 formObject.captcha = captcha;
 
-                console.log(formObject);
+                console.log(formObject);*/
 
                 $.post("/api/signup", formObject, function(data) {
                     var input = '<div id="errormsg" class="form-group"><br><label class="col-md-4 control-label" for="null"></label><div class="col-md-4"><p class="formerror bg-danger">' + data.text + '</p></div></div>';
