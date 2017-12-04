@@ -21,21 +21,6 @@
                 {{else}}
                 <li><a href="/about">{{PG_ABOUT}}</a></li>
                 {{/if}}
-                {{#if dirActive}}
-                <li class="active"><a href="/directory">{{PG_DIRECTORY}}</a></li>
-                {{else}}
-                <li><a href="/directory">{{PG_DIRECTORY}}</a></li>
-                {{/if}}
-                {{#if donateActive}}
-                <li class="active"><a href="/donate">{{PG_DONATE}}</a></li>
-                {{else}}
-                <li><a href="/donate">{{PG_DONATE}}</a></li>
-                {{/if}}
-                {{#if contactActive}}
-                <li class="active"><a href="/contact">{{PG_CONTACT}}</a></li>
-                {{else}}
-                <li><a href="/contact">{{PG_CONTACT}}</a></li>
-                {{/if}}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {{#if user}}
@@ -57,21 +42,6 @@
                     </div>
                 </li>
                 {{/if}}
-                <li style="margin-right: 13px;" class="dropdown navbar-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{PGTXT_GLOBAL_LANGUAGE}} <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" onClick="changeLanguage('english')">English</a></li>
-                        <li><a href="#" onClick="changeLanguage('esperanto')">Esperanto</a></li>
-                        <li><a href="#" onClick="changeLanguage('french')">Français</a></li>
-                        <li><a href="#" onClick="changeLanguage('german')">Deutsch</a></li>
-                        <li><a href="#" onClick="changeLanguage('greek')">Ελληνικά</a></li>
-                        <li><a href="#" onClick="changeLanguage('italian')">Italiano</a></li>
-                        <li><a href="#" onClick="changeLanguage('polish')">Polski</a></li>
-                        <li><a href="#" onClick="changeLanguage('russian')">Русский</a></li>
-                        <li><a href="#" onClick="changeLanguage('spanish')">Español</a></li>
-                        <li><a href="#" onClick="changeLanguage('ukrainian')">Українська</a></li>
-                    </ul>
-                </li>
             </ul>
         </div>
     </div>

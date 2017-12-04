@@ -1,4 +1,3 @@
-require('newrelic');
 var chalk = require('chalk');
 var express = require('express');
 var hbs = require('hbs');
@@ -21,20 +20,6 @@ var host = "0.0.0.0";
 var port = (process.env.PORT || 5555);
 
 app.use(sessions(process.env.REDIS_URL, process.env.COOKIE_SECRET));
-
-// ensure that a language is set for every session
-// and pull the language ahead of time, saving us some
-// calls to i18n.getLanguage()
-var language;
-app.use(function(req, res, next) {
-    if (typeof req.session.language === "undefined") {
-        i18n.changeLanguage(req.session);
-    }
-
-    language = i18n.getLanguage(req.session.language);
-
-    next();
-});
 
 app.use(function (req, res, next) {
     req.db = db;
@@ -72,100 +57,34 @@ app.use('/img',express.static(__dirname + '/assets/img'));
 app.use('/browserconfig.xml',express.static(__dirname + '/assets/browserconfig.xml'));
 app.use('/manifest.json',express.static(__dirname + '/assets/manifest.json'));
 
-// letsencrypt verification
-app.use('/.well-known',express.static(__dirname + '/assets/.well-known'));
-
 // frontend routes
 app.get('/', function (req, res) {
-    language.PG_TITLE = language.PG_HOME;
-
-    if (req.session.user && req.session.user.username) {
-        language.name = req.session.user.username;
-        language.user = req.session.user;
-    } else if (req.session.user === undefined) {
-        language.name = req.ip;
-        language.user = "";
-    }
-
-    res.render('home', language);
+    let data = createDataObject(req);
+    res.render('home', data);
 });
 
 app.get('/debug', function (req, res) {
     res.json(req.session);
 });
 
-app.get('/about', function (req, res) {
-    language.PG_TITLE = language.PG_ABOUT;
-
-    if (req.session.user && req.session.user.username) {
-        language.user = req.session.user;
-    } else if (req.session.user === undefined) {
-        language.user = "";
-    }
-
-    res.render('about', language);
-});
-
-app.get('/directory', function (req, res) {
-    language.PG_TITLE = language.PG_DIRECTORY;
-
-    if (req.session.user && req.session.user.username) {
-        language.user = req.session.user;
-    } else if (req.session.user === undefined) {
-        language.user = "";
-    }
-
-    res.render('directory', language);
-});
-
-app.get('/donate', function (req, res) {
-    language.PG_TITLE = language.PG_DONATE;
-
-    if (req.session.user && req.session.user.username) {
-        language.user = req.session.user;
-    } else if (req.session.user === undefined) {
-        language.user = "";
-    }
-
-    res.render('donate', language);
-});
-
-app.get('/contact', function (req, res) {
-    language.PG_TITLE = language.PG_CONTACT;
-
-    if (req.session.user && req.session.user.username) {
-        language.user = req.session.user;
-    } else if (req.session.user === undefined) {
-        language.user = "";
-    }
-
-    res.render('contact', language);
-});
-
 app.get('/login', function (req, res) {
-    language.PG_TITLE = language.PG_LOGIN;
-
-    if (req.session.user && req.session.user.username) {
-        language.user = req.session.user;
-    } else if (req.session.user === undefined) {
-        language.user = "";
-    }
-
-    res.render('login', language);
+    let data = createDataObject(req);
+    res.render('login', data);
 });
 
 app.get('/signup', function (req, res) {
-    language.PG_TITLE = language.PG_SIGNUP;
-
-    if (req.session.user && req.session.user.username) {
-        language.user = req.session.user;
-    } else if (req.session.user === undefined) {
-        language.user = "";
-    }
-
-    res.render('signup', language);
+    let data = createDataObject(req);
+    res.render('signup', data);
 });
 
 app.get('/profile/:id', function (req, res) {
     // TODO
 });
+
+function createDataObject(req) {
+    if (req.session.user && req.session.user.username) {
+        return req.session.user;
+    } else {
+        return { "empty": true };
+    }
+}

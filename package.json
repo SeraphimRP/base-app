@@ -1,7 +1,7 @@
 {
-  "name": "retejo.me",
+  "name": "base-app",
   "version": "1.0.0",
-  "description": "a web hosting service for Esperanto speakers",
+  "description": "A barebones framework for my Node.js apps.",
   "main": "app.js",
   "scripts": {
     "test": "mocha test.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/retejo/retejo.me.git"
+    "url": "git+https://git.vypr.space/vypr/base-app.git"
   },
-  "author": "The Retejo.me Team (and contributors)",
+  "author": "Elliott Pardee",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/retejo/retejo.me/issues"
+    "url": "https://git.vypr.space/vypr/base-app/issues"
   },
-  "homepage": "https://retejo.me",
+  "homepage": "https://vypr.space",
   "dependencies": {
     "body-parser": "^1.15.2",
     "chalk": "^1.1.3",
@@ -30,7 +30,6 @@
     "lodash": "^4.15.0",
     "mocha": "^4.0.0",
     "mongodb": "^2.2.11",
-    "newrelic": "^1.33.0",
     "nodemon": "^1.11.0",
     "profanity-util": "0.0.5",
     "request": "^2.78.0",
